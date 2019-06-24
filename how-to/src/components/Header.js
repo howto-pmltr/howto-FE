@@ -2,7 +2,13 @@ import React from "react";
 
 class Header extends React.Component {
   render() {
-    return <button>Log In</button>;
+    return (
+      <div>
+        <div>How To</div>
+        <button>Sign Up</button>
+        <button>Log In</button>
+      </div>
+    );
   }
 }
 

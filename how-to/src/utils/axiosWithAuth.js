@@ -7,6 +7,6 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: token
     },
-    baseURL: "http://localhost:5000/api"
+    baseURL: "https://quiet-chamber-53661.herokuapp.com/"
   });
 };

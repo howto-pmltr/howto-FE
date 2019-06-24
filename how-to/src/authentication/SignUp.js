@@ -1,20 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { login } from "../actions";
+import { signUp } from "../actions";
 
-class Register extends React.Component {
+class SignUp extends React.Component {
   state = {
     credentials: {
-      email: "",
       username: "",
+      email: "",
       password: ""
     }
   };
 
-  loginHere = e => {
+  signUpHere = e => {
     e.preventDefault();
-    this.props.login(this.state.credentials).then(res => {
+    this.props.signUp(this.state.credentials).then(res => {
       if (res) {
         this.props.history.push("/protected");
       }
@@ -35,27 +35,29 @@ class Register extends React.Component {
       <div>
         <div>
           <h1>How To</h1>
-          <form onSubmit={this.loginHere}>
+          <form onSubmit={this.signUpHere}>
             <input
-              placeholder="Username i.e Allison"
+              placeholder="Email"
               onChange={this.handleChanges}
               name="email"
               value={this.state.credentials.email}
             />
             <input
-              placeholder="Username i.e Allison"
+              placeholder="Username"
               onChange={this.handleChanges}
               name="username"
               value={this.state.credentials.username}
             />
             <input
               type="password"
-              placeholder="Password i.e. Allison"
+              placeholder="Password"
               onChange={this.handleChanges}
               name="password"
               value={this.state.credentials.password}
             />
-            <button>{this.props.loggingIn ? "Logging in.." : "Log In"}</button>
+            <button>
+              {this.props.registering ? "Signing Up..." : "Sign Up"}
+            </button>
           </form>
         </div>
       </div>
@@ -64,11 +66,11 @@ class Register extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  loggingIn: state.loggingIn,
+  registering: state.registering,
   error: state.error
 });
 
 export default connect(
   mapStateToProps,
-  { login }
-)(Register);
+  { signUp }
+)(SignUp);
