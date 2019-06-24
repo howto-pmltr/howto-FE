@@ -12,11 +12,13 @@ export const login = creds => dispatch => {
   return axiosWithAuth()
     .post("/users/signin", creds)
     .then(res => {
-      localStorage.setItem("token", res.data.payload);
+      console.log(res);
+      localStorage.setItem("token", res.data.token);
       dispatch({ type: LOGIN_SUCCESS });
       return true;
     })
     .catch(err => {
+      console.log(err);
       dispatch({ type: LOGIN_FAILURE });
       return err.response;
     });
@@ -32,7 +34,8 @@ export const signUp = creds => dispatch => {
   return axiosWithAuth()
     .post("/users/signup", creds)
     .then(res => {
-      localStorage.setItem("token", res.data.payload);
+      console.log(res);
+      localStorage.setItem("token", res.data.payload.token);
       dispatch({ type: REGISTER_SUCCESS });
       return true;
     })
