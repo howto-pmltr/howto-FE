@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { signUp } from "../actions";
 
-class SignUp extends React.Component {
+class Register extends React.Component {
   state = {
     credentials: {
       username: "",
@@ -73,4 +73,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { signUp }
-)(SignUp);
+)(Register);
