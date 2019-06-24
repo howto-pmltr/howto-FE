@@ -9,6 +9,7 @@ import Header from "./components/Header.js";
 import Login from "./authentication/Login";
 import Register from "./authentication/Register";
 import ArticleContainer from "./components/ArticleContainer";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <Route path="/" component={Header} />
       <Route path="/signup" component={Register} />
       <Route path="/login" component={Login} />
-      <Route path="/protected" component={ArticleContainer} />
+      <PrivateRoute path="/protected" component={ArticleContainer} />
     </div>
   );
 }
