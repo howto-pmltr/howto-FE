@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 class Header extends React.Component {
-  signOut = e => {
+  logOut = e => {
     localStorage.removeItem("token");
   };
 
@@ -18,7 +18,7 @@ class Header extends React.Component {
           <button>Log In</button>
         </Link>
         <Link to="/login">
-          <button onClick={this.signOut}>Sign Out</button>
+          <button onClick={this.logOut}>Log Out</button>
         </Link>
       </div>
     );
