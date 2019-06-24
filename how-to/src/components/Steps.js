@@ -11,7 +11,7 @@ class Steps extends React.Component {
     return (
       <StepBox>
         {this.props.steps.map(step => (
-          <Step step={step} />
+          <Step step={step} key={step.stepNumber} />
         ))}
       </StepBox>
     );

@@ -19,8 +19,8 @@ export const login = creds => dispatch => {
     })
     .catch(err => {
       console.log(err);
-      dispatch({ type: LOGIN_FAILURE });
-      return err.response;
+      dispatch({ type: LOGIN_FAILURE, payload: err.response.data.error });
+      return err.response.data.error;
     });
 };
 
@@ -40,7 +40,7 @@ export const signUp = creds => dispatch => {
       return true;
     })
     .catch(err => {
-      dispatch({ type: REGISTER_FAILURE, payload: err.response });
-      return err.response;
+      dispatch({ type: REGISTER_FAILURE, payload: err.response.data.error });
+      return err.response.data.error;
     });
 };
