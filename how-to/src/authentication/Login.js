@@ -16,7 +16,7 @@ class Login extends React.Component {
     console.log(this.state.credentials);
     this.props.login(this.state.credentials).then(res => {
       if (res) {
-        this.props.history.push("/protected");
+        this.props.history.push("/home");
       }
     });
   };

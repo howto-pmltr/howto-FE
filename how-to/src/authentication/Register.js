@@ -16,7 +16,7 @@ class Register extends React.Component {
     e.preventDefault();
     this.props.signUp(this.state.credentials).then(res => {
       if (res) {
-        this.props.history.push("/protected");
+        this.props.history.push("/home");
       }
     });
   };

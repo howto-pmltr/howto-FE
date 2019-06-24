@@ -17,7 +17,7 @@ function App() {
       <Route path="/" component={Header} />
       <Route path="/signup" component={Register} />
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/protected" component={ArticleContainer} />
+      <PrivateRoute path="/home" component={ArticleContainer} />
     </div>
   );
 }
