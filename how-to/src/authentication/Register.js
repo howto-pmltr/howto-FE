@@ -37,7 +37,7 @@ class Register extends React.Component {
           <h1>How To</h1>
           <form onSubmit={this.signUpHere}>
             <input
-              autofocus="true"
+              autoFocus="true"
               placeholder="Email"
               onChange={this.handleChanges}
               name="email"

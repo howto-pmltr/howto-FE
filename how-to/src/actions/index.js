@@ -19,6 +19,7 @@ export const login = creds => dispatch => {
     })
     .catch(err => {
       console.log(err);
+      console.log(axios);
       dispatch({ type: LOGIN_FAILURE, payload: err.response.data.error });
       return err.response.data.error;
     });
@@ -35,7 +36,7 @@ export const signUp = creds => dispatch => {
     .post("/users/signup", creds)
     .then(res => {
       console.log(res);
-      localStorage.setItem("token", res.data.payload.token);
+      localStorage.setItem("token", res.data.token);
       dispatch({ type: REGISTER_SUCCESS });
       return true;
     })
