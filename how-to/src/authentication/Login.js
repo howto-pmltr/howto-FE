@@ -37,7 +37,7 @@ class Login extends React.Component {
           <h1>How To</h1>
           <form onSubmit={this.loginHere}>
             <input
-              autoFocus="true"
+              autoFocus={true}
               placeholder="Username i.e Allison"
               onChange={this.handleChanges}
               name="username"
