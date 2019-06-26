@@ -1,12 +1,13 @@
 import React from "react";
-import { addArticle } from "../actions";
+import { addStep } from "../actions";
 import { connect } from "react-redux";
 
-class ArticleForm extends React.Component {
+class StepForm extends React.Component {
   state = {
     title: "",
-    description: "",
-    image_path: ""
+    content: "",
+    image_path: "",
+    step_number: 1
   };
 
   handleChanges = e => {
@@ -15,29 +16,29 @@ class ArticleForm extends React.Component {
     });
   };
 
-  postArticle = e => {
+  postStep = e => {
     e.preventDefault();
-    const newArticle = {
+    const newStep = {
       title: this.state.title,
-      description: this.state.description,
+      content: this.state.content,
       image_path: this.state.image_path,
-      author_username: localStorage.getItem("username"),
-      userID: localStorage.getItem("userID"),
-      published_at: "true"
+      userID: Number(localStorage.getItem("userID")),
+      step_number: this.state.step_number,
+      article_id: this.props.articles.id
     };
-    console.log(newArticle);
-    this.props.addArticle(newArticle);
-    this.setState({
+    console.log(newStep);
+    this.props.addStep(newStep);
+    this.setState(prevState => ({
       title: "",
-      description: "",
-      image_path: ""
-    });
-    this.props.history.push(`/${localStorage.getItem("username")}`);
+      content: "",
+      image_path: "",
+      step_number: (prevState += 1)
+    }));
   };
 
   render() {
     return (
-      <form onSubmit={this.postArticle}>
+      <form onSubmit={this.postStep}>
         <input
           autoFocus={true}
           placeholder="Title"
@@ -46,10 +47,10 @@ class ArticleForm extends React.Component {
           name="title"
         />
         <input
-          placeholder="Description"
+          placeholder="Content"
           onChange={this.handleChanges}
-          value={this.state.description}
-          name="description"
+          value={this.state.content}
+          name="content"
         />
         <input
           placeholder="Image URL"
@@ -57,7 +58,7 @@ class ArticleForm extends React.Component {
           value={this.state.image_path}
           name="image_path"
         />
-        <button>Add Article</button>
+        <button>Add Step</button>
       </form>
     );
   }
@@ -71,5 +72,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { addArticle }
-)(ArticleForm);
+  { addStep }
+)(StepForm);

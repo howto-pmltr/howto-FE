@@ -9,7 +9,16 @@ import {
   FETCH_ARTICLES_SUCCESS,
   FETCH_ARTICLES_FAILURE,
   ADD_ARTICLE_SUCCESS,
-  ADD_ARTICLE_FAILURE
+  ADD_ARTICLE_FAILURE,
+  DELETE_ARTICLE_SUCCESS,
+  DELETE_ARTICLE_FAILURE,
+  FIND_SPECIFIC_ARTICLE_START,
+  FIND_SPECIFIC_ARTICLE_SUCCESS,
+  FIND_SPECIFIC_ARTICLE_FAILURE,
+  ADD_STEP_SUCCESS,
+  ADD_STEP_FAILURE,
+  DELETE_STEP_SUCCESS,
+  DELETE_STEP_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -77,6 +86,25 @@ export default (state = initialState, action) => {
         fetching: false,
         error: action.payload
       };
+    case FIND_SPECIFIC_ARTICLE_START:
+      return {
+        ...state,
+        fetching: true,
+        error: ""
+      };
+    case FIND_SPECIFIC_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        articles: action.payload,
+        steps: action.payload.steps
+      };
+    case FIND_SPECIFIC_ARTICLE_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+        error: action.payload
+      };
     case ADD_ARTICLE_SUCCESS:
       return {
         ...state,
@@ -84,6 +112,41 @@ export default (state = initialState, action) => {
         error: ""
       };
     case ADD_ARTICLE_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case DELETE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        articles: state.articles.filter(
+          article => article.id !== action.payload
+        ),
+        error: ""
+      };
+    case DELETE_ARTICLE_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case ADD_STEP_SUCCESS:
+      return {
+        ...state,
+        steps: action.payload,
+        error: ""
+      };
+    case ADD_STEP_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case DELETE_STEP_SUCCESS:
+      return {
+        ...state,
+        steps: state.steps.filter(step => step.id !== action.payload),
+        error: ""
+      };
+    case DELETE_STEP_FAILURE:
       return {
         ...state,
         error: action.payload

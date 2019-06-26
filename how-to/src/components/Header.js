@@ -7,6 +7,7 @@ class Header extends React.Component {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     localStorage.removeItem("userID");
+    window.location.reload();
   };
 
   render() {
@@ -18,8 +19,8 @@ class Header extends React.Component {
         </Link>
         <Link
           to={
-            localStorage.getItem("username")
-              ? `/${localStorage.getItem("username")}`
+            localStorage.getItem("userID")
+              ? `/${localStorage.getItem("userID")}`
               : "/login"
           }
         >
@@ -34,7 +35,7 @@ class Header extends React.Component {
         <Link to="/login">
           <button onClick={this.logOut}>Log Out</button>
         </Link>
-        <Link to="newpost">
+        <Link to="/newpost">
           <button>Post Tutorial</button>
         </Link>
       </div>

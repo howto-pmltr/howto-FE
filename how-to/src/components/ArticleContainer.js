@@ -4,24 +4,29 @@ import { fetchArticle } from "../actions";
 
 //components
 import ArticleHeader from "./ArticleHeader";
-import Steps from "./Steps";
 
 //styles
 import styled from "styled-components";
 
 class ArticleContainer extends React.Component {
   componentDidMount() {
-    this.props.fetchArticle();
+    const id = this.props.match.url.replace(/[^0-9]/g, "");
+    console.log(id);
+    if (!id) {
+      this.props.fetchArticle();
+    } else this.props.fetchArticle(id);
   }
 
   render() {
-    console.log(this.props.articles);
-    if (this.props.fetching === true) {
+    const currentArticles = Array.from(this.props.articles);
+
+    if (this.props.fetching) {
       return <div>loading...</div>;
     }
+    console.log(this.props.articles);
     return (
       <ArticleBox>
-        {this.props.articles.map(article => (
+        {currentArticles.map(article => (
           <ArticleHeader article={article} key={article.id} />
         ))}
       </ArticleBox>

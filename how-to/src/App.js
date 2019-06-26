@@ -10,8 +10,8 @@ import Login from "./authentication/Login";
 import Register from "./authentication/Register";
 import ArticleContainer from "./components/ArticleContainer";
 import ArticleForm from "./components/ArticleForm";
-import UserProfile from "./components/UserProfile";
 import PrivateRoute from "./components/PrivateRoute";
+import ArticlePage from "./components/ArticlePage";
 
 function App() {
   return (
@@ -19,11 +19,12 @@ function App() {
       <Route path="/" component={Header} />
       <Route path="/signup" component={Register} />
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/home" component={ArticleContainer} />
-      <PrivateRoute path="/newpost" component={ArticleForm} />
+      <PrivateRoute exact path="/newpost" component={ArticleForm} />
+      <Route exact path="/articles/:id" component={ArticlePage} />
+      <PrivateRoute exact path="/home" component={ArticleContainer} />
       <PrivateRoute
-        path={`/${localStorage.getItem("username")}`}
-        component={UserProfile}
+        path={`/${localStorage.getItem("userID")}`}
+        component={ArticleContainer}
       />
     </div>
   );

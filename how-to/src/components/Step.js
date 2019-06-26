@@ -4,15 +4,20 @@ import React from "react";
 import styled from "styled-components";
 
 class Step extends React.Component {
+  removeStep = e => {
+    e.preventDefault();
+    this.props.deleteStep(this.props.article_id, this.props.step.id);
+  };
   render() {
     return (
       <StepCard>
-        <h2>{this.props.step.stepNumber}</h2>
+        <h2>{this.props.step.step_number}</h2>
         <StepImg
-          src={`${this.props.step.img}`}
-          alt={`${this.props.step.alt}`}
+          src={`${this.props.step.img_path}`}
+          alt={`${this.props.step.title}`}
         />
-        <p>{this.props.step.description}</p>
+        <p>{this.props.step.content}</p>
+        <button onClick={this.removeStep}>X</button>
       </StepCard>
     );
   }
