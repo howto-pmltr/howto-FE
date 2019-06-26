@@ -8,10 +8,7 @@ class TagPage extends React.Component {
         this.props.fetchTags()
     }
 
-    searchTags = e => {
-        e.preventDefault()
 
-    }
     render() {
         console.log(this.props.tags)
         return (

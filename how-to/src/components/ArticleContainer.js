@@ -45,7 +45,8 @@ const mapStateToProps = state => {
   return {
     articles: state.articles,
     fetching: state.fetching,
-    error: state.error
+    error: state.error,
+    adding: state.adding
   };
 };
 

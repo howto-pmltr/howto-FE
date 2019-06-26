@@ -74,7 +74,6 @@ class ArticleForm extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <StyledForm onSubmit={this.props.editingArticle === false ? this.postArticle : this.changeArticle}>
         <input

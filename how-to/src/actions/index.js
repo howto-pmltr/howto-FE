@@ -26,6 +26,12 @@ export const login = creds => dispatch => {
     });
 };
 
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
+
+export const logout = () => dispatch => {
+  dispatch({ type: LOGOUT_SUCCESS })
+}
+
 export const REGISTER_START = "REGISTER_ START";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
@@ -100,11 +106,12 @@ export const toggleEditArticle = () => dispatch => {
   dispatch({ type: TOGGLE_EDITING_ARTICLE })
 }
 
-
+export const ADD_ARTICLE_START = "ADD_ARTICLE_START"
 export const ADD_ARTICLE_SUCCESS = "ADD_ARTICLE_SUCCESS";
 export const ADD_ARTICLE_FAILURE = "ADD_ARTICLE_FAILURE";
 
 export const addArticle = newArticle => dispatch => {
+  dispatch({ type: ADD_ARTICLE_START })
   axiosWithAuth()
     .post(`/users/${newArticle.userID}/articles`, newArticle)
     .then(res => {

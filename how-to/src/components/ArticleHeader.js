@@ -9,6 +9,9 @@ import styled from "styled-components";
 
 class ArticleHeader extends React.Component {
 
+  state = {
+    count: 0
+  }
   removePost = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -36,6 +39,14 @@ class ArticleHeader extends React.Component {
     this.props.editArticle(articleToPublish)
   }
 
+  toggleLike = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({ liked: !this.state.liked })
+    this.state.liked === true ? this.setState(prevState => prevState.count--) : this.setState(prevState => prevState.count++)
+    console.log(this.state)
+  }
+
   render() {
 
     return (
@@ -50,6 +61,8 @@ class ArticleHeader extends React.Component {
               src={`${this.props.article.image_path}`}
               alt={`${this.props.article.title}`}
             />
+            <p>{this.state.count} Likes</p>
+            <button onClick={this.toggleLike}>{this.state.liked === true ? <i className="fas fa-thumbs-up"></i> : <i className="far fa-thumbs-up"></i>}</button>
             <button onClick={this.editPost}>Edit</button>
             <button onClick={this.removePost}>X</button>
           </TitleBox>

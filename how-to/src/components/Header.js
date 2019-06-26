@@ -1,13 +1,15 @@
 import React from "react";
+import { connect } from "react-redux"
+import { logout } from "../actions"
 
 import { Link } from "react-router-dom";
 
 class Header extends React.Component {
-  logOut = e => {
+  signOut = e => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     localStorage.removeItem("userID");
-    window.location.reload();
+    this.props.logout()
   };
 
   render() {
@@ -33,7 +35,7 @@ class Header extends React.Component {
           <button>Log In</button>
         </Link>
         <Link to="/login">
-          <button onClick={this.logOut}>Log Out</button>
+          <button onClick={this.signOut}>Log Out</button>
         </Link>
         <Link to="/newpost">
           <button>Post Tutorial</button>
@@ -46,4 +48,13 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    error: state.error
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Header);

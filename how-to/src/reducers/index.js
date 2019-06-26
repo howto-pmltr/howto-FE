@@ -2,6 +2,7 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_SUCCESS,
   REGISTER_START,
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
@@ -9,6 +10,7 @@ import {
   FETCH_ARTICLES_SUCCESS,
   FETCH_ARTICLES_FAILURE,
   TOGGLE_EDITING_ARTICLE,
+  ADD_ARTICLE_START,
   ADD_ARTICLE_SUCCESS,
   ADD_ARTICLE_FAILURE,
   EDIT_ARTICLE_SUCCESS,
@@ -67,6 +69,18 @@ export default (state = initialState, action) => {
         loggingIn: false,
         error: action.payload
       };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        articles: [],
+        tags: [],
+        loggingIn: false,
+        fetching: false,
+        registering: false,
+        editingArticle: false,
+        editingStep: false,
+        error: ""
+      }
     case REGISTER_START:
       return {
         ...state,
@@ -131,15 +145,23 @@ export default (state = initialState, action) => {
         fetching: false,
         error: action.payload
       };
+    case ADD_ARTICLE_START:
+      return {
+        ...state,
+        adding: true,
+        error: ""
+      }
     case ADD_ARTICLE_SUCCESS:
       return {
         ...state,
+        adding: false,
         articles: action.payload,
         error: ""
       };
     case ADD_ARTICLE_FAILURE:
       return {
         ...state,
+        adding: false,
         error: action.payload
       };
     case EDIT_ARTICLE_SUCCESS:
