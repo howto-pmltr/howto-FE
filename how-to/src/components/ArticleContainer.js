@@ -10,11 +10,11 @@ import styled from "styled-components";
 
 class ArticleContainer extends React.Component {
   componentDidMount() {
-    const id = this.props.match.url.replace(/[^0-9]/g, "");
-    console.log(id);
-    if (!id) {
+    const userID = this.props.match.url.replace(/[^0-9]/g, "");
+    console.log(userID);
+    if (!userID) {
       this.props.fetchArticle();
-    } else this.props.fetchArticle(id);
+    } else this.props.fetchArticle(userID);
   }
 
   render() {

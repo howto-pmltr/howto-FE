@@ -94,6 +94,13 @@ export const findSpecificArticle = id => dispatch => {
     });
 };
 
+export const TOGGLE_EDITING_MODE = "TOGGLE_EDITING_MODE"
+
+export const toggleEditMode = () => dispatch => {
+  dispatch({ type: TOGGLE_EDITING_MODE })
+}
+
+
 export const ADD_ARTICLE_SUCCESS = "ADD_ARTICLE_SUCCESS";
 export const ADD_ARTICLE_FAILURE = "ADD_ARTICLE_FAILURE";
 
@@ -108,6 +115,20 @@ export const addArticle = newArticle => dispatch => {
       dispatch({ type: ADD_ARTICLE_FAILURE, payload: "error" });
     });
 };
+
+export const EDIT_ARTICLE_SUCCESS = "EDIT_ARTICLE_SUCCESS";
+export const EDIT_ARTICLE_FAILURE = "EDIT_ARTICLE_FAILURE";
+
+export const editArticle = editedArticle => dispatch => {
+  axiosWithAuth()
+    .put(`/users/${editedArticle.userID}/articles/${editedArticle.articleID}`, editedArticle)
+    .then(res => {
+      dispatch({ type: EDIT_ARTICLE_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: EDIT_ARTICLE_SUCCESS, payload: err.response.data.error })
+    })
+}
 
 export const DELETE_ARTICLE_SUCCESS = "DELETE_ARTICLE_SUCCESS";
 export const DELETE_ARTICLE_FAILURE = "DELETE_ARTICLE_FAILURE";
@@ -178,4 +199,32 @@ export const fetchTags = id => dispatch => {
     .catch(err => {
       dispatch({ type: FETCH_TAGS_FAILURE, payload: err.response.data.error });
     });
+};
+
+export const ADD_TAGS_SUCCESS = "ADD_TAGS_SUCCESS";
+export const ADD_TAGS_FAILURE = "ADD_TAGS_FAILURE";
+
+export const addTags = (tag_title, articleID) => dispatch => {
+  axiosWithAuth()
+    .post(`/articles/${articleID}/tags`, { tag_title })
+    .then(res => {
+      dispatch({ type: ADD_TAGS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_TAGS_FAILURE, payload: { tag_title } });
+    });
+};
+
+export const DELETE_TAGS_SUCCESS = "DELETE_TAGS_SUCCESS";
+export const DELETE_TAGS_FAILURE = "DELETE_TAGS_FAILURE";
+
+export const deleteTags = (articleID, tagID) => dispatch => {
+  axiosWithAuth()
+    .delete(`/articles/${articleID}/tags/${tagID}`)
+    .then(res => {
+      dispatch({ type: DELETE_TAGS_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_TAGS_FAILURE, payload: err.response.data.error })
+    })
 };

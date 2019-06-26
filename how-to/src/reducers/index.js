@@ -8,8 +8,11 @@ import {
   FETCH_ARTICLES_START,
   FETCH_ARTICLES_SUCCESS,
   FETCH_ARTICLES_FAILURE,
+  TOGGLE_EDITING_MODE,
   ADD_ARTICLE_SUCCESS,
   ADD_ARTICLE_FAILURE,
+  EDIT_ARTICLE_SUCCESS,
+  EDIT_ARTICLE_FAILURE,
   DELETE_ARTICLE_SUCCESS,
   DELETE_ARTICLE_FAILURE,
   FIND_SPECIFIC_ARTICLE_START,
@@ -21,7 +24,11 @@ import {
   DELETE_STEP_FAILURE,
   FETCH_TAGS_START,
   FETCH_TAGS_SUCCESS,
-  FETCH_TAGS_FAILURE
+  FETCH_TAGS_FAILURE,
+  ADD_TAGS_SUCCESS,
+  ADD_TAGS_FAILURE,
+  DELETE_TAGS_SUCCESS,
+  DELETE_TAGS_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -29,10 +36,7 @@ const initialState = {
   loggingIn: false,
   fetching: false,
   registering: false,
-  steps: [],
-  tags: [],
-  error: "",
-  tagError: ""
+  error: ""
 };
 
 export default (state = initialState, action) => {
@@ -102,8 +106,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         fetching: false,
-        articles: action.payload,
-        steps: action.payload.steps
+        articles: action.payload
       };
     case FIND_SPECIFIC_ARTICLE_FAILURE:
       return {
@@ -111,6 +114,11 @@ export default (state = initialState, action) => {
         fetching: false,
         error: action.payload
       };
+    case TOGGLE_EDITING_MODE:
+      return {
+        ...state,
+        editing: !state.editing
+      }
     case ADD_ARTICLE_SUCCESS:
       return {
         ...state,
@@ -122,6 +130,17 @@ export default (state = initialState, action) => {
         ...state,
         error: action.payload
       };
+    case EDIT_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        error: ""
+      }
+    case EDIT_ARTICLE_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
     case DELETE_ARTICLE_SUCCESS:
       return {
         ...state,
@@ -138,7 +157,7 @@ export default (state = initialState, action) => {
     case ADD_STEP_SUCCESS:
       return {
         ...state,
-        steps: action.payload,
+        articles: action.payload,
         error: ""
       };
     case ADD_STEP_FAILURE:
@@ -149,7 +168,6 @@ export default (state = initialState, action) => {
     case DELETE_STEP_SUCCESS:
       return {
         ...state,
-        steps: state.steps.filter(step => step.id !== action.payload),
         error: ""
       };
     case DELETE_STEP_FAILURE:
@@ -166,16 +184,34 @@ export default (state = initialState, action) => {
     case FETCH_TAGS_SUCCESS:
       return {
         ...state,
-        fetching: false,
-        tags: action.payload,
-        tagError: ""
+        fetching: false
       };
     case FETCH_TAGS_FAILURE:
       return {
         ...state,
-        fetching: false,
-        tagError: action.payload
+        fetching: false
       };
+    case ADD_TAGS_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        error: ""
+      };
+    case ADD_TAGS_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case DELETE_TAGS_SUCCESS:
+      return {
+        ...state,
+        error: ""
+      }
+    case DELETE_TAGS_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
     default:
       return state;
   }
