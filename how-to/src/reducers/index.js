@@ -18,7 +18,10 @@ import {
   ADD_STEP_SUCCESS,
   ADD_STEP_FAILURE,
   DELETE_STEP_SUCCESS,
-  DELETE_STEP_FAILURE
+  DELETE_STEP_FAILURE,
+  FETCH_TAGS_START,
+  FETCH_TAGS_SUCCESS,
+  FETCH_TAGS_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -26,7 +29,10 @@ const initialState = {
   loggingIn: false,
   fetching: false,
   registering: false,
-  error: ""
+  steps: [],
+  tags: [],
+  error: "",
+  tagError: ""
 };
 
 export default (state = initialState, action) => {
@@ -150,6 +156,25 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      };
+    case FETCH_TAGS_START:
+      return {
+        ...state,
+        fetching: true,
+        tagError: ""
+      };
+    case FETCH_TAGS_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        tags: action.payload,
+        tagError: ""
+      };
+    case FETCH_TAGS_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+        tagError: action.payload
       };
     default:
       return state;

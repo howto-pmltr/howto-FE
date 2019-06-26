@@ -161,3 +161,21 @@ export const deleteStep = (article_id, step_id) => dispatch => {
       dispatch({ type: DELETE_STEP_FAILURE, payload: err.response.data.error });
     });
 };
+
+export const FETCH_TAGS_START = "FETCH_TAGS_START";
+export const FETCH_TAGS_SUCCESS = "FETCH_TAGS_SUCCESS";
+export const FETCH_TAGS_FAILURE = "FETCH_TAGS_FAILURE";
+
+export const fetchTags = id => dispatch => {
+  //const url = `/articles/${id}/tags`;
+
+  dispatch({ type: FETCH_TAGS_START });
+  axiosWithAuth()
+    .get(`/articles/${id}/tags`)
+    .then(res => {
+      dispatch({ type: FETCH_TAGS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: FETCH_TAGS_FAILURE, payload: err.response.data.error });
+    });
+};

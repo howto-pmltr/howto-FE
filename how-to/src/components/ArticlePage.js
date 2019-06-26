@@ -1,11 +1,12 @@
 import React from "react";
-import { findSpecificArticle, deleteStep } from "../actions";
+import { findSpecificArticle, deleteStep, fetchTags } from "../actions";
 import { connect } from "react-redux";
 
 //components
 import ArticleHeader from "./ArticleHeader";
 import Step from "./Step";
 import StepForm from "./StepForm";
+import Tags from "./Tags";
 
 //styles
 import styled from "styled-components";
@@ -14,6 +15,7 @@ class ArticlePage extends React.Component {
   componentDidMount() {
     const id = this.props.match.url.replace(/[^0-9]/g, "");
     this.props.findSpecificArticle(id);
+    this.props.fetchTags(id);
   }
 
   render() {
@@ -22,10 +24,24 @@ class ArticlePage extends React.Component {
     }
     console.log(this.props.articles);
     console.log(this.props.articles.steps);
+    console.log(this.props.tags);
     return (
       <ArticleBox>
         <ArticleHeader article={this.props.articles} />
         <StepForm article={this.props.articles} />
+        <div>
+          {this.props.tags
+            ? this.props.tags.map(tag => {
+                return (
+                  <Tags
+                    tag={tag}
+                    key={tag.id}
+                    article_id={this.props.articles.id}
+                  />
+                );
+              })
+            : null}
+        </div>
         <div>
           {this.props.articles.steps
             ? this.props.articles.steps.map(step => {
@@ -44,7 +60,7 @@ class ArticlePage extends React.Component {
     );
   }
 }
-
+/*<Tags article_id={this.props.articles.id} />*/
 //styled components
 const ArticleBox = styled.div`
   width: 75%;
@@ -56,11 +72,12 @@ const mapStateToProps = state => {
   return {
     articles: state.articles,
     fetching: state.fetching,
-    error: state.error
+    error: state.error,
+    tags: state.tags
   };
 };
 
 export default connect(
   mapStateToProps,
-  { findSpecificArticle, deleteStep }
+  { findSpecificArticle, deleteStep, fetchTags }
 )(ArticlePage);
