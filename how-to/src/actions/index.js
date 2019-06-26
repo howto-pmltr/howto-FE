@@ -94,10 +94,10 @@ export const findSpecificArticle = id => dispatch => {
     });
 };
 
-export const TOGGLE_EDITING_MODE = "TOGGLE_EDITING_MODE"
+export const TOGGLE_EDITING_ARTICLE = "TOGGLE_EDITING_ARTICLE"
 
-export const toggleEditMode = () => dispatch => {
-  dispatch({ type: TOGGLE_EDITING_MODE })
+export const toggleEditArticle = () => dispatch => {
+  dispatch({ type: TOGGLE_EDITING_ARTICLE })
 }
 
 
@@ -165,6 +165,26 @@ export const addStep = newStep => dispatch => {
     });
 };
 
+export const TOGGLE_EDITING_STEP = "TOGGLE_EDITING_STEP"
+
+export const toggleEditStep = () => dispatch => {
+  dispatch({ type: TOGGLE_EDITING_STEP })
+}
+
+export const EDIT_STEP_SUCCESS = "EDIT_STEP_SUCCESS"
+export const EDIT_STEP_FAILURE = "EDIT_STEP_FAILURE"
+
+export const editStep = editedStep => dispatch => {
+  axiosWithAuth()
+    .put(`/users/${editedStep.userID}/articles/${editedStep.articleID}/steps/${editedStep.stepID}`, editedStep)
+    .then(res => {
+      dispatch({ type: EDIT_STEP_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: EDIT_STEP_FAILURE, payload: err.response.data.error })
+    })
+}
+
 export const DELETE_STEP_SUCCESS = "DELETE_STEP_SUCCESS";
 export const DELETE_STEP_FAILURE = "DELETE_STEP_FAILURE";
 
@@ -187,12 +207,12 @@ export const FETCH_TAGS_START = "FETCH_TAGS_START";
 export const FETCH_TAGS_SUCCESS = "FETCH_TAGS_SUCCESS";
 export const FETCH_TAGS_FAILURE = "FETCH_TAGS_FAILURE";
 
-export const fetchTags = id => dispatch => {
+export const fetchTags = () => dispatch => {
   //const url = `/articles/${id}/tags`;
 
   dispatch({ type: FETCH_TAGS_START });
   axiosWithAuth()
-    .get(`/articles/${id}/tags`)
+    .get(`/tags`)
     .then(res => {
       dispatch({ type: FETCH_TAGS_SUCCESS, payload: res.data });
     })
@@ -201,19 +221,33 @@ export const fetchTags = id => dispatch => {
     });
 };
 
-export const ADD_TAGS_SUCCESS = "ADD_TAGS_SUCCESS";
-export const ADD_TAGS_FAILURE = "ADD_TAGS_FAILURE";
+export const ADD_ARTICLE_TAGS_SUCCESS = "ADD_ARTICLE_TAGS_SUCCESS";
+export const ADD_ARTICLE_TAGS_FAILURE = "ADD_ARTICLE_TAGS_FAILURE";
 
-export const addTags = (tag_title, articleID) => dispatch => {
+export const addArticleTags = (tag_title, articleID) => dispatch => {
   axiosWithAuth()
     .post(`/articles/${articleID}/tags`, { tag_title })
     .then(res => {
-      dispatch({ type: ADD_TAGS_SUCCESS, payload: res.data });
+      dispatch({ type: ADD_ARTICLE_TAGS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: ADD_TAGS_FAILURE, payload: { tag_title } });
+      dispatch({ type: ADD_ARTICLE_TAGS_FAILURE, payload: { tag_title } });
     });
 };
+
+export const ADD_TAGS_SUCCESS = "ADD_TAGS_SUCCESS"
+export const ADD_TAGS_FAILURE = "ADD_TAGS_FAILURE"
+
+export const addTags = title => dispatch => {
+  axiosWithAuth()
+    .post("/tags", { title })
+    .then(res => {
+      dispatch({ type: ADD_TAGS_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: ADD_ARTICLE_TAGS_FAILURE, payload: err.response.data.error })
+    })
+}
 
 export const DELETE_TAGS_SUCCESS = "DELETE_TAGS_SUCCESS";
 export const DELETE_TAGS_FAILURE = "DELETE_TAGS_FAILURE";
@@ -228,3 +262,20 @@ export const deleteTags = (articleID, tagID) => dispatch => {
       dispatch({ type: DELETE_TAGS_FAILURE, payload: err.response.data.error })
     })
 };
+
+/*export const SEARCH_BY_TAGS_SUCCESS = "SEARCH_BY_TAGS"
+
+export const fetchArticle = tag => dispatch => {
+  axiosWithAuth()
+    .get("/articles")
+    .then(res => {
+      console.log(res);
+      dispatch({ type: SEARCH_BY_TAGS_SUCCESS, payload: res.data});
+    })
+    .catch(err => {
+      dispatch({
+        type: FETCH_ARTICLES_FAILURE,
+        payload: err.response.data.error
+      });
+    });
+};*/

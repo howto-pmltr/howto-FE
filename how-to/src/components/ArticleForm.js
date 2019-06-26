@@ -1,13 +1,17 @@
 import React from "react";
-import { addArticle, editArticle, toggleEditMode } from "../actions";
+import { addArticle, editArticle, toggleEditArticle } from "../actions";
 import { connect } from "react-redux";
+
+//styles
+import styled from "styled-components"
 
 class ArticleForm extends React.Component {
   state = {
     title: "",
     description: "",
     image_path: "",
-    article_id: ""
+    article_id: "",
+    published_at: null
   };
 
   componentDidMount() {
@@ -16,7 +20,8 @@ class ArticleForm extends React.Component {
         title: this.props.postInfo.title,
         description: this.props.postInfo.description,
         image_path: this.props.postInfo.image_path,
-        articleID: this.props.postInfo.id
+        articleID: this.props.postInfo.id,
+        published_at: this.props.postInfo.published_at === true ? true : null
       })
     }
   }
@@ -35,7 +40,7 @@ class ArticleForm extends React.Component {
       image_path: this.state.image_path,
       author_username: localStorage.getItem("username"),
       userID: localStorage.getItem("userID"),
-      published_at: "true"
+      published_at: this.state.published_at
     };
     console.log(newArticle);
     this.props.addArticle(newArticle);
@@ -56,11 +61,10 @@ class ArticleForm extends React.Component {
       author_username: localStorage.getItem("username"),
       userID: localStorage.getItem("userID"),
       articleID: this.state.articleID,
-      published_at: "true"
+      published_at: this.state.published_at
     }
     this.props.editArticle(editedArticle)
-    this.props.toggleEditMode()
-    this.props.history.push(`/articles/${editedArticle.articleID}`)
+    this.props.toggleEditArticle()
     this.setState({
       title: "",
       description: "",
@@ -70,9 +74,9 @@ class ArticleForm extends React.Component {
   }
 
   render() {
-    console.log(this.props.postInfo)
+    console.log(this.props)
     return (
-      <form onSubmit={this.props.postInfo ? this.changeArticle : this.postArticle}>
+      <StyledForm onSubmit={this.props.editingArticle === false ? this.postArticle : this.changeArticle}>
         <input
           autoFocus={true}
           placeholder="Title"
@@ -92,19 +96,27 @@ class ArticleForm extends React.Component {
           value={this.state.image_path}
           name="image_path"
         />
-        <button>{this.props.postInfo ? "Submit Changes" : "Add Article"}</button>
-      </form>
+        <button>{this.props.editingArticle === false ? "Add Article" : "Submit Changes"}</button>
+      </StyledForm>
     );
   }
 }
 
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    `
+
 const mapStateToProps = state => {
   return {
     articles: state.articles,
-    error: ""
+    error: state.error,
+    editingArticle: state.editingArticle
   };
 };
 export default connect(
   mapStateToProps,
-  { addArticle, editArticle, toggleEditMode }
+  { addArticle, editArticle, toggleEditArticle }
 )(ArticleForm);

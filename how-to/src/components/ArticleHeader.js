@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { deleteArticle, toggleEditMode } from "../actions";
+import { deleteArticle, toggleEditArticle, editArticle } from "../actions";
 import ArticleForm from "./ArticleForm"
 
 //styles
@@ -18,24 +18,38 @@ class ArticleHeader extends React.Component {
   editPost = e => {
     e.preventDefault();
     e.stopPropagation();
-    this.props.toggleEditMode();
+    this.props.toggleEditArticle();
+  }
+
+  publishPost = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const articleToPublish = {
+      title: this.props.article.id,
+      image_path: this.props.article.image_path,
+      author_username: this.props.article.author_username,
+      description: this.props.article.description,
+      published_at: "true",
+      userID: localStorage.getItem("userID"),
+      articleID: this.props.article.id
+    }
+    this.props.editArticle(articleToPublish)
   }
 
   render() {
 
     return (
-      this.props.editing === true ? <ArticleForm history={this.props.history} postInfo={this.props.article} /> :
+      this.props.editingArticle === true ? <ArticleForm postInfo={this.props.article} /> :
         <Link to={`/articles/${this.props.article.id}`} className="linkEdit">
           <TitleBox>
+            {this.props.article.published_at === null ? <button onClick={this.publishPost}>Publish!</button> : null}
             <h1>{this.props.article.title}</h1>
             <h3>{this.props.article.description}</h3>
             <h2>{this.props.article.author_username}</h2>
-            {this.props.article.image_path ? (
-              <TitleImg
-                src={`${this.props.article.image_path}`}
-                alt={`${this.props.article.title}`}
-              />
-            ) : null}
+            <TitleImg
+              src={`${this.props.article.image_path}`}
+              alt={`${this.props.article.title}`}
+            />
             <button onClick={this.editPost}>Edit</button>
             <button onClick={this.removePost}>X</button>
           </TitleBox>
@@ -56,13 +70,13 @@ const TitleBox = styled.div`
 const mapStateToProps = state => {
   return {
     error: state.error,
-    editing: state.editing
+    editingArticle: state.editingArticle
   };
 };
 
 export default connect(
   mapStateToProps,
-  { deleteArticle, toggleEditMode }
+  { deleteArticle, toggleEditArticle, editArticle }
 )(ArticleHeader);
 
 /*<TitleImg src={`${this.props.image}`} alt={`${this.props.alt}`} />*/

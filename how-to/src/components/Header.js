@@ -38,6 +38,9 @@ class Header extends React.Component {
         <Link to="/newpost">
           <button>Post Tutorial</button>
         </Link>
+        <Link to="/tags">
+          <button>Browse Tags</button>
+        </Link>
       </div>
     );
   }

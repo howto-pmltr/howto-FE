@@ -1,4 +1,5 @@
 import React from "react";
+import StepForm from "./StepForm"
 
 //styles
 import styled from "styled-components";
@@ -8,17 +9,19 @@ class Step extends React.Component {
     e.preventDefault();
     this.props.deleteStep(this.props.article_id, this.props.step.id);
   };
+
   render() {
     return (
-      <StepCard>
-        <h2>{this.props.step.step_number}</h2>
-        <StepImg
-          src={`${this.props.step.img_path}`}
-          alt={`${this.props.step.title}`}
-        />
-        <p>{this.props.step.content}</p>
-        <button onClick={this.removeStep}>X</button>
-      </StepCard>
+      this.props.editingStep === true ? <StepForm stepInfo={this.props.step} /> :
+        <StepCard>
+          <h2>{this.props.step.step_number}</h2>
+          <StepImg
+            src={`${this.props.step.img_path}`}
+            alt={`${this.props.step.title}`}
+          />
+          <p>{this.props.step.content}</p>
+          <button onClick={this.removeStep}>X</button>
+        </StepCard>
     );
   }
 }
