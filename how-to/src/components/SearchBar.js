@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import { fetchByAuthor } from "../actions"
 
 
 class SearchBar extends React.Component {
@@ -11,15 +12,20 @@ class SearchBar extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+        console.log(this.state.searchTerm)
     };
 
     search = e => {
         e.preventDefault();
-
+        this.props.fetchByAuthor(this.state.searchTerm)
+        this.setState({ searchTerm: "" })
+        this.props.history.push("/searchresults");
     }
+
     render() {
         return (
-            <form onInput={this.search}>
+
+            <form onSubmit={this.search}>
                 <input
                     autoFocus={true}
                     placeholder="Search"
@@ -29,8 +35,21 @@ class SearchBar extends React.Component {
                 />
                 <button onClick={this.search}>Search</button>
             </form>
+
         )
     }
 }
 
-export default SearchBar;
+const mapStateToProps = state => {
+    return {
+        articles: state.articles,
+        fetching: state.fetching,
+        error: state.error,
+        editingStep: state.editingStep
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    { fetchByAuthor }
+)(SearchBar);

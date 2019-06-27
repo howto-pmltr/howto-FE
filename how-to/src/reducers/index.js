@@ -35,7 +35,11 @@ import {
   ADD_TAGS_SUCCESS,
   ADD_TAGS_FAILURE,
   DELETE_TAGS_SUCCESS,
-  DELETE_TAGS_FAILURE
+  DELETE_TAGS_FAILURE,
+  SEARCH_BY_AUTHOR_SUCCESS,
+  SEARCH_BY_AUTHOR_FAILURE,
+  SEARCH_BY_TEXT_SUCCESS,
+  SEARCH_BY_TEXT_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -155,7 +159,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         adding: false,
-        articles: action.payload,
         error: ""
       };
     case ADD_ARTICLE_FAILURE:
@@ -268,6 +271,28 @@ export default (state = initialState, action) => {
         error: ""
       }
     case DELETE_TAGS_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case SEARCH_BY_AUTHOR_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        error: ""
+      }
+    case SEARCH_BY_AUTHOR_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case SEARCH_BY_TEXT_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        error: ""
+      }
+    case SEARCH_BY_TEXT_FAILURE:
       return {
         ...state,
         error: action.payload

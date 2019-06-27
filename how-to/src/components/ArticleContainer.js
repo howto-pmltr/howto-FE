@@ -11,11 +11,16 @@ import styled from "styled-components";
 class ArticleContainer extends React.Component {
   componentDidMount() {
     const userID = this.props.match.url.replace(/[^0-9]/g, "");
+    if (this.props.match.url === "/searchresults") {
+      return this.props.articles
+    }
     console.log(userID);
     if (!userID) {
       this.props.fetchArticle();
     } else this.props.fetchArticle(userID);
   }
+
+
 
   render() {
     const currentArticles = Array.from(this.props.articles);

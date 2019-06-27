@@ -15,13 +15,14 @@ class ArticleForm extends React.Component {
   };
 
   componentDidMount() {
+    console.log(this.props.postInfo)
     if (this.props.postInfo) {
       return this.setState({
         title: this.props.postInfo.title,
         description: this.props.postInfo.description,
         image_path: this.props.postInfo.image_path,
         articleID: this.props.postInfo.id,
-        published_at: this.props.postInfo.published_at === true ? true : null
+        published_at: this.props.postInfo.published_at
       })
     }
   }
@@ -61,7 +62,7 @@ class ArticleForm extends React.Component {
       author_username: localStorage.getItem("username"),
       userID: localStorage.getItem("userID"),
       articleID: this.state.articleID,
-      published_at: this.state.published_at
+      published_at: this.state.published_at ? "true" : null
     }
     this.props.editArticle(editedArticle)
     this.props.toggleEditArticle()
@@ -74,6 +75,7 @@ class ArticleForm extends React.Component {
   }
 
   render() {
+    console.log(this.state.published_at)
     return (
       <StyledForm onSubmit={this.props.editingArticle === false ? this.postArticle : this.changeArticle}>
         <input

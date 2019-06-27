@@ -286,3 +286,38 @@ export const fetchArticle = tag => dispatch => {
       });
     });
 };*/
+
+export const SEARCH_BY_AUTHOR_SUCCESS = "SEARCH_BY_AUTHOR_SUCCESS"
+export const SEARCH_BY_AUTHOR_FAILURE = "SEARCH_BY_AUTHOR_FAILURE"
+
+export const fetchByAuthor = query => dispatch => {
+  axiosWithAuth()
+    .get(`/articles/?tag=${query}`)
+    .then(res => {
+      dispatch({ type: SEARCH_BY_AUTHOR_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({
+        type: SEARCH_BY_AUTHOR_FAILURE, payload: err.response.data.error
+      })
+    })
+}
+
+export const SEARCH_BY_TEXT_SUCCESS = "SEARCH_BY_AUTHOR_SUCCESS"
+export const SEARCH_BY_TEXT_FAILURE = "SEARCH_BY_AUTHOR_FAILURE"
+
+export const fetchByText = query => dispatch => {
+  axiosWithAuth()
+    .get(`/articles/?q=${query}`)
+    .then(res => {
+      dispatch({ type: SEARCH_BY_TEXT_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({
+        type: SEARCH_BY_TEXT_FAILURE, payload: err.response.data.error
+      })
+    })
+}
+
+
+

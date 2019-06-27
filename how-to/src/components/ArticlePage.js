@@ -24,15 +24,19 @@ class ArticlePage extends React.Component {
     }
 
     render() {
+        //checks to see if the user currently logged in is the author of the post.
+        const userControls = localStorage.getItem("username") === this.props.articles.author_username;
+
         if (this.props.fetching) {
             console.log(this.props.articles.tags)
             return <div>loading...</div>;
         }
+
         return (
             <ArticleBox>
-                <ArticleHeader article={this.props.articles} />
-                {this.props.editingStep === false ? <StepForm article={this.props.articles} /> : "hi"}
-                <TagForm article={this.props.articles} />
+                <ArticleHeader article={this.props.articles} userControls={userControls} />
+                {this.props.editingStep === false && userControls ? <StepForm article={this.props.articles} /> : null}
+                {userControls ? <TagForm article={this.props.articles} /> : null}
                 {this.props.articles.tags ? this.props.articles.tags.map(tag => {
                     return (
                         <ArticleTags

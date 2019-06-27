@@ -15,8 +15,6 @@ class TagForm extends React.Component {
 
     postTag = e => {
         e.preventDefault();
-        console.log(this.props.articles);
-        console.log(this.state.title);
         this.props.addArticleTags(this.state.title, this.props.articles.id);
         this.props.addTags(this.state.title)
         this.setState({

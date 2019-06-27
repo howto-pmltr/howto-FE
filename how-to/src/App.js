@@ -29,6 +29,7 @@ function App() {
         path={`/${localStorage.getItem("userID")}`}
         component={ArticleContainer}
       />
+      <PrivateRoute exact path="/searchresults" component={ArticleContainer} />
       <Route exact path="/tags" component={TagPage} />
     </div>
   );

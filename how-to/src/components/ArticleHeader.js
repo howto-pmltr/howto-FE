@@ -42,8 +42,10 @@ class ArticleHeader extends React.Component {
   toggleLike = e => {
     e.preventDefault();
     e.stopPropagation();
+    /*When the user clicks the like button, state will toggle from unliked to liked and vice versa. If liking the article, like count increments, if unliking, like count decrements.
     this.setState({ liked: !this.state.liked })
-    this.state.liked === true ? this.setState(prevState => prevState.count--) : this.setState(prevState => prevState.count++)
+    this.state.liked === true ? this.setState(prevState => prevState.count--) : this.setState(prevState => prevState.count++)*/
+
     console.log(this.state)
   }
 
@@ -63,8 +65,13 @@ class ArticleHeader extends React.Component {
             />
             <p>{this.state.count} Likes</p>
             <button onClick={this.toggleLike}>{this.state.liked === true ? <i className="fas fa-thumbs-up"></i> : <i className="far fa-thumbs-up"></i>}</button>
-            <button onClick={this.editPost}>Edit</button>
-            <button onClick={this.removePost}>X</button>
+
+            {this.props.userControls ?
+              <div>
+                <button onClick={this.editPost}>Edit</button>
+                <button onClick={this.removePost}>X</button>
+              </div> : null}
+
           </TitleBox>
         </Link>
     );
