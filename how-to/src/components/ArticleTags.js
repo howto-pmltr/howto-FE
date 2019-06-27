@@ -17,10 +17,12 @@ class ArticleTags extends React.Component {
         e.stopPropagation();
         this.props.deleteTags(this.props.articleID, this.props.tag.id)
     }
+
     render() {
+        console.log(this.props)
         return (
             <div>
-                <div onClick={this.toggleTag}>{this.props.tag.tag_title}</div>
+                <button onClick={() => this.props.tagSearch(this.props.tag.tag_title)}>{this.props.tag.tag_title}</button>
                 {this.state.edit === true ? <button onClick={this.deleteTag}>x</button> : null}
             </div>
         );

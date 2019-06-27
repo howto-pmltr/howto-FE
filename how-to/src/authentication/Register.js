@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import PasswordField from 'material-ui-password-field';
 import { signUp } from "../actions";
 
 class Register extends React.Component {
@@ -15,10 +15,11 @@ class Register extends React.Component {
   signUpHere = e => {
     e.preventDefault();
     this.props.signUp(this.state.credentials).then(res => {
-      if (res) {
+      if (this.props.error === "") {
         this.props.history.push("/home");
       }
     });
+    this.setState({ credentials: { password: "" } })
   };
 
   handleChanges = e => {
@@ -49,8 +50,7 @@ class Register extends React.Component {
               name="username"
               value={this.state.credentials.username}
             />
-            <input
-              type="password"
+            <PasswordField
               placeholder="Password"
               onChange={this.handleChanges}
               name="password"
@@ -60,6 +60,7 @@ class Register extends React.Component {
               {this.props.registering ? "Signing Up..." : "Sign Up"}
             </button>
           </form>
+          <div>{this.props.error !== "" ? this.props.error.message : null}</div>
         </div>
       </div>
     );

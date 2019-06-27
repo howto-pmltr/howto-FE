@@ -292,7 +292,7 @@ export const SEARCH_BY_AUTHOR_FAILURE = "SEARCH_BY_AUTHOR_FAILURE"
 
 export const fetchByAuthor = query => dispatch => {
   axiosWithAuth()
-    .get(`/articles/?tag=${query}`)
+    .get(`/articles/?author=${query}`)
     .then(res => {
       dispatch({ type: SEARCH_BY_AUTHOR_SUCCESS, payload: res.data })
     })
@@ -319,5 +319,66 @@ export const fetchByText = query => dispatch => {
     })
 }
 
+export const SEARCH_BY_TAG_SUCCESS = "SEARCH_BY_TAG_SUCCESS"
+export const SEARCH_BY_TAG_FAILURE = "SEARCH_BY_TAG_FAILURE"
 
+export const fetchByTag = query => dispatch => {
+  axiosWithAuth()
+    .get(`/articles/?tag=${query}`)
+    .then(res => {
+      dispatch({ type: SEARCH_BY_TAG_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({
+        type: SEARCH_BY_TAG_FAILURE, payload: err.response.data.error
+      })
+    })
+}
 
+export const LIKE_ARTICLE_SUCCESS = "LIKE_ARTICLE_SUCCESS"
+export const LIKE_ARTICLE_FAILURE = "LIKE_ARTICLE_FAILURE"
+
+export const likeArticle = articleID => dispatch => {
+  axiosWithAuth()
+    .post(`/articles/${articleID}/like`)
+    .then(res => {
+      dispatch({ type: LIKE_ARTICLE_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({
+        type: LIKE_ARTICLE_FAILURE, payload: err.response.data.error
+      })
+    })
+}
+
+export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS"
+export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE"
+
+export const addComment = (articleID, message) => dispatch => {
+  axiosWithAuth()
+    .post(`/articles/${articleID}/comments`, message)
+    .then(res => {
+      dispatch({ type: ADD_COMMENT_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({
+        type: ADD_COMMENT_FAILURE, payload: err.response.data.error
+      })
+    })
+}
+
+export const DELETE_COMMENT_SUCCESS = "DELETE_COMMENT_SUCCESS"
+export const DELETE_COMMENT_FAILURE = "DELETE_COMMENT_FAILURE"
+
+export const deleteComment = (articleID, commentID) => dispatch => {
+  axiosWithAuth()
+    .delete(`/articles/${articleID}/comments/${commentID}`)
+    .then(res => {
+      dispatch({ type: DELETE_COMMENT_SUCCESS, payload: commentID })
+    })
+    .catch(err => {
+      dispatch({
+        type: DELETE_COMMENT_FAILURE, payload: err.response.data.error
+      })
+    })
+}

@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import { fetchTags, fetchByAuthor } from "../actions"
+import { fetchTags, fetchByTag } from "../actions"
 import Tag from "./Tag"
 
 class TagPage extends React.Component {
@@ -9,8 +9,9 @@ class TagPage extends React.Component {
         this.props.fetchTags()
     }
 
-    tagSearch = tag => {
-        this.props.fetchByAuthor(tag)
+    tagSearch = (tag) => {
+        this.props.fetchByTag(tag)
+        this.props.history.push("/searchresults");
     }
 
     render() {
@@ -32,5 +33,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchTags, fetchByAuthor }
+    { fetchTags, fetchByTag }
 )(TagPage);

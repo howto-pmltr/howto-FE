@@ -39,12 +39,21 @@ import {
   SEARCH_BY_AUTHOR_SUCCESS,
   SEARCH_BY_AUTHOR_FAILURE,
   SEARCH_BY_TEXT_SUCCESS,
-  SEARCH_BY_TEXT_FAILURE
+  SEARCH_BY_TEXT_FAILURE,
+  SEARCH_BY_TAG_SUCCESS,
+  SEARCH_BY_TAG_FAILURE,
+  LIKE_ARTICLE_SUCCESS,
+  LIKE_ARTICLE_FAILURE,
+  ADD_COMMENT_SUCCESS,
+  ADD_COMMENT_FAILURE,
+  DELETE_COMMENT_SUCCESS,
+  DELETE_COMMENT_FAILURE
 } from "../actions";
 
 const initialState = {
   articles: [],
   tags: [],
+  comments: [],
   loggingIn: false,
   fetching: false,
   registering: false,
@@ -135,7 +144,8 @@ export default (state = initialState, action) => {
         fetching: true,
         error: "",
         editingArticle: false,
-        editingStep: false
+        editingStep: false,
+        comments: ""
       };
     case FIND_SPECIFIC_ARTICLE_SUCCESS:
       return {
@@ -293,6 +303,50 @@ export default (state = initialState, action) => {
         error: ""
       }
     case SEARCH_BY_TEXT_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case SEARCH_BY_TAG_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        error: ""
+      }
+    case SEARCH_BY_TAG_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case LIKE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        error: ""
+      }
+    case LIKE_ARTICLE_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        comments: action.payload,
+        error: ""
+      }
+    case ADD_COMMENT_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case DELETE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        comments: state.comments.filter(comment => comment.id === action.payload),
+        error: ""
+      }
+    case DELETE_COMMENT_FAILURE:
       return {
         ...state,
         error: action.payload
