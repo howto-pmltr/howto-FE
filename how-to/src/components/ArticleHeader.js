@@ -29,7 +29,7 @@ class ArticleHeader extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     const articleToToggle = {
-      title: this.props.article.id,
+      title: this.props.article.title,
       image_path: this.props.article.image_path,
       author_username: this.props.article.author_username,
       description: this.props.article.description,

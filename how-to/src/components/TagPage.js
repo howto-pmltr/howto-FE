@@ -30,7 +30,6 @@ class TagPage extends React.Component {
 
 //styled comoponents
 const TagHolder = styled.div`
-margin-top: 20vh
 border: 2px solid black;
 background-color: white;
 padding: 5rem;
