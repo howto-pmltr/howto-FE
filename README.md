@@ -14,6 +14,7 @@
 *Profile page that shows all of your public and private articles.
 *Like articles.
 *Seamlessly update articles and steps without leaving the article.
+\*Conditionally rendered components to reduce overall amount of reused code and redundant components.
 
 ##Development Roadmap
 
@@ -23,6 +24,9 @@
 *Allow users to browse articles they have liked.
 *Click username to search by Author (Search by Author functionality exists but click name functionality upcoming!)
 *Follow other users, recommend articles to users, direct message users.
+
+##Potential Pivot
+\*Run the same architecture and become a site to post and search memes. Steps can be replaced with the ability to add sub-memes. All other features intact. Gather the most likes to become the one true Dank MemeLord.
 
 ##Technologies Used
 
