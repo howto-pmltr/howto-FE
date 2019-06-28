@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux"
 import { deleteTags } from "../actions"
+import Chip from '@material-ui/core/Chip';
 
 class ArticleTags extends React.Component {
     state = {
@@ -22,8 +23,12 @@ class ArticleTags extends React.Component {
         console.log(this.props)
         return (
             <div>
-                <button onClick={() => this.props.tagSearch(this.props.tag.tag_title)}>{this.props.tag.tag_title}</button>
-                {this.state.edit === true ? <button onClick={this.deleteTag}>x</button> : null}
+                <Chip
+                    label={this.props.tag.tag_title}
+                    onClick={() => this.props.tagSearch(this.props.tag.tag_title)}
+                    onDelete={this.deleteTag}
+                    variant="outlined"
+                />
             </div>
         );
     }

@@ -203,7 +203,7 @@ export const deleteStep = (article_id, step_id) => dispatch => {
       )}/articles/${article_id}/steps/${step_id}`
     )
     .then(res => {
-      dispatch({ type: DELETE_STEP_SUCCESS, payload: step_id });
+      dispatch({ type: DELETE_STEP_SUCCESS, payload: article_id });
     })
     .catch(err => {
       dispatch({ type: DELETE_STEP_FAILURE, payload: err.response.data.error });

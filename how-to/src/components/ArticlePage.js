@@ -45,7 +45,7 @@ class ArticlePage extends React.Component {
 
         return (
             <ArticleBox>
-                <ArticleHeader article={this.props.articles} userControls={userControls} />
+                <ArticleHeader history= {this.props.history} article={this.props.articles} userControls={userControls} />
                 <p>{this.props.articles.likes_count} Likes</p>
                 <button onClick={this.Like}><i className="fas fa-thumbs-up" /></button>
                 {this.props.editingStep === false && userControls

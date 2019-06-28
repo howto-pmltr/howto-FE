@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Route path="/" component={Header} />
-      <Route path="/" component={SearchBar} />
+      <PrivateRoute path="/" component={SearchBar} />
       <Route path="/signup" component={Register} />
       <Route path="/login" component={Login} />
       <PrivateRoute exact path="/newpost" component={ArticleForm} />
@@ -36,3 +36,4 @@ function App() {
 }
 
 export default App;
+

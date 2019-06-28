@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteArticle, toggleEditArticle, editArticle, likeArticle } from "../actions";
 import ArticleForm from "./ArticleForm"
+import EditIcon from "@material-ui/icons/Edit"
+import DeleteIcon from "@material-ui/icons/Delete"
 
 //styles
 import styled from "styled-components";
+
+import { Card, CardHeader, CardMedia, CardActionArea, CardActions, CardContent, Button, Typography, IconButton } from '@material-ui/core/';
 
 class ArticleHeader extends React.Component {
 
@@ -13,6 +17,7 @@ class ArticleHeader extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     this.props.deleteArticle(this.props.article.id);
+    this.props.history.push("/home")
   };
 
   editPost = e => {
@@ -21,10 +26,10 @@ class ArticleHeader extends React.Component {
     this.props.toggleEditArticle();
   }
 
-  publishPost = e => {
+  togglePublishPost = e => {
     e.preventDefault();
     e.stopPropagation();
-    const articleToPublish = {
+    const articleToToggle = {
       title: this.props.article.id,
       image_path: this.props.article.image_path,
       author_username: this.props.article.author_username,
@@ -33,7 +38,9 @@ class ArticleHeader extends React.Component {
       userID: localStorage.getItem("userID"),
       articleID: this.props.article.id
     }
-    this.props.editArticle(articleToPublish)
+    console.log(articleToToggle)
+    this.props.editArticle(articleToToggle)
+    this.props.history.push(`/articles/${this.props.article.id}`);
   }
 
 
@@ -41,45 +48,50 @@ class ArticleHeader extends React.Component {
   render() {
 
     return (
-      this.props.editingArticle === true
-        ? <ArticleForm postInfo={this.props.article} />
-        : <Link to={`/articles/${this.props.article.id}`} className="linkEdit">
-          <TitleBox>
-            {this.props.article.published_at === null
-              ? <button onClick={this.publishPost}>Publish!</button>
-              : null}
-            <h1>{this.props.article.title}</h1>
-            <h3>{this.props.article.description}</h3>
-            <h2>{this.props.article.author_username}</h2>
-
-            <TitleImg
-              src={`${this.props.article.image_path}`}
-              alt={`${this.props.article.title}`}
+      <ArticleCard>
+        {this.props.editingArticle === true
+          ? <ArticleForm postInfo={this.props.article} />
+          : <Link to={`/articles/${this.props.article.id}`} className="linkEdit">
+            <CardHeader
+              title={this.props.article.title}
+              subheader={this.props.article.author_username} />
+            <CardMedia
+              className="card"
+              image={`${this.props.article.image_path}`}
+              title={`${this.props.article.title}`}
             />
+            <CardContent>
+              <Typography variant="body2" color="textSecondary" component="p">{this.props.article.description}</Typography>
+            </CardContent>
+            {//userControls is a variable that checks if the currently logged in user matches the author of an article. 
 
+              //If the user is the author of the article, they will see this section which includes edit, delete and publish buttons. Publish will only appear if the article is currently unpublished. 
+              this.props.userControls
+                ? <CardActions >
+                  <IconButton aria-label="Edit Article" onClick={this.editPost}><EditIcon /></IconButton>
+                  <IconButton aria-label="Edit Article" onClick={this.removePost}><DeleteIcon /></IconButton>
+                  {this.props.article.published_at === null
+                    ? <Button size="small" color="primary" onClick={this.togglePublishPost}>Publish!</Button>
+                    : null}
+                </CardActions>
+                : null}
 
-
-
-            {this.props.userControls
-              ? <div>
-                <button onClick={this.editPost}>Edit</button>
-                <button onClick={this.removePost}>X</button>
-              </div>
-              : null}
-
-          </TitleBox>
-        </Link>
+          </Link>}
+      </ArticleCard>
     );
   }
 }
+
+const ArticleCard = styled(Card)({
+  margin: "2rem"
+});
 
 const TitleImg = styled.img`
   width: 75%;
 `;
 
 const TitleBox = styled.div`
-  border: 1px solid black;
-  margin-top: 1rem;
+
 `;
 
 const mapStateToProps = state => {
@@ -97,4 +109,3 @@ export default connect(
 /*<TitleImg src={`${this.props.image}`} alt={`${this.props.alt}`} />*/
 
 /*            <button onClick={this.toggleLike}>{this.state.liked === true ? <i className="fas fa-thumbs-up"></i> : <i className="far fa-thumbs-up"></i>}</button>*/
-

@@ -191,9 +191,7 @@ export default (state = initialState, action) => {
     case DELETE_ARTICLE_SUCCESS:
       return {
         ...state,
-        articles: state.articles.filter(
-          article => article.id !== action.payload
-        ),
+        articles: Array.from(state.articles).filter(article => article.id !== action.payload),
         error: ""
       };
     case DELETE_ARTICLE_FAILURE:

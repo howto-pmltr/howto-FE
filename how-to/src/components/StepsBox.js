@@ -18,6 +18,7 @@ class StepsBox extends React.Component {
                             <Step
                                 step={step}
                                 key={step.id}
+                                article={this.props.articles}
                                 article_id={this.props.articles.id}
                                 deleteStep={this.props.deleteStep}
                                 editingStep={this.props.editingStep}

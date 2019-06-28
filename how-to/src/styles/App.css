@@ -1,5 +1,19 @@
 .App {
   text-align: center;
+  max-width: 1000px;
+  margin: auto;
+  width: 95%;
+}
+
+@media screen and (max-width: 500px) {
+  .App {
+    width: 95%;
+  }
+}
+
+#root {
+  min-height: 100vh;
+  background: whitesmoke;
 }
 
 .App-logo {
@@ -35,4 +49,24 @@
 .linkEdit {
   text-decoration: none;
   color: black;
+}
+
+.signUpsignIn {
+  margin: auto;
+  height: 400px;
+  width: 300px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20vh;
+}
+
+.card {
+  padding: 36.25%;
+}
+
+.card2 {
+  margin-top: 2rem;
 }

@@ -2,7 +2,10 @@ import React from "react";
 import { connect } from "react-redux"
 import { logout } from "../actions"
 
-import { Link } from "react-router-dom";
+import LoggedInHeader from "./LoggedInHeader"
+import LoggedOutHeader from "./LoggedOutHeader"
+
+import styled from "styled-components"
 
 class Header extends React.Component {
   signOut = e => {
@@ -14,46 +17,23 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div>
+      <HeaderDiv>
         <div>How To</div>
-        {!localStorage.getItem("userID") ?
-          <div>
-            <Link to="/signup">
-              <button>Sign Up</button>
-            </Link>
-            <Link to="/login">
-              <button>Log In</button>
-            </Link></div>
-          : <div>
-            <Link to="/home">
-              <button>Home</button>
-            </Link>
-            <Link
-              to={
-                localStorage.getItem("userID")
-                  ? `/${localStorage.getItem("userID")}`
-                  : "/login"
-              }
-            >
-              <button>Profile</button>
-            </Link>
-
-            <Link to="/login">
-              <button onClick={this.signOut}>Log Out</button>
-            </Link>
-            <Link to="/newpost">
-              <button>Post Tutorial</button>
-            </Link>
-            <Link to="/tags">
-              <button>Browse Tags</button>
-            </Link> </div>}
-
-
-      </div>
+        {//Checks if user is logged in. If they are not, they receive the logged out header. If they are they receive the logged in header.
+          !localStorage.getItem("userID")
+            ? <LoggedOutHeader />
+            : <LoggedInHeader signOut={this.signOut} />}
+      </HeaderDiv>
     );
   }
 }
 
+const HeaderDiv = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding-top: 2rem;`
 const mapStateToProps = state => {
   return {
     error: state.error

@@ -1,11 +1,16 @@
 import React from "react"
+import Chip from '@material-ui/core/Chip';
 
 class Tag extends React.Component {
 
 
 
     render() {
-        return <button onClick={() => this.props.tagSearch(this.props.tag.title)}>{this.props.tag.title}</button>
+        return <Chip
+            size="small"
+            label={this.props.tag.title}
+            onClick={() => this.props.tagSearch(this.props.tag.title)}
+        />
     }
 }
 

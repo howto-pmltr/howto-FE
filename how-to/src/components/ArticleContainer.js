@@ -18,8 +18,26 @@ class ArticleContainer extends React.Component {
     if (!userID) {
       this.props.fetchArticle();
     } else this.props.fetchArticle(userID);
+    if (!this.props.articles) {
+      this.props.fetchArticle(userID)
+    }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.key !== this.props.location.key) {
+      const userID = this.props.match.url.replace(/[^0-9]/g, "");
+      if (this.props.match.url === "/searchresults") {
+        return this.props.articles
+      }
+      console.log(userID);
+      if (!userID) {
+        this.props.fetchArticle();
+      } else this.props.fetchArticle(userID);
+      if (!this.props.articles) {
+        this.props.fetchArticle(userID)
+      }
+    }
+  }
 
 
   render() {
@@ -32,7 +50,7 @@ class ArticleContainer extends React.Component {
     return (
       <ArticleBox>
         {currentArticles.map(article => (
-          <ArticleHeader article={article} key={article.id} />
+          <ArticleHeader history={this.props.history} article={article} key={article.id} />
         ))}
       </ArticleBox>
     );
