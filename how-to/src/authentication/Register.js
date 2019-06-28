@@ -52,6 +52,7 @@ class Register extends React.Component {
             />
             <TextField
               placeholder="Username"
+              autocorrect="off"
               autocapitalize="none"
               onChange={this.handleChanges}
               name="username"

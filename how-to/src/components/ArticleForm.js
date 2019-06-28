@@ -81,7 +81,6 @@ class ArticleForm extends React.Component {
       <FormBox>
         <StyledForm onSubmit={this.props.editingArticle === false ? this.postArticle : this.changeArticle}>
           <TextField
-            autoFocus={true}
             placeholder="Title"
             onChange={this.handleChanges}
             value={this.state.title}
