@@ -70,3 +70,19 @@
 .card2 {
   margin-top: 2rem;
 }
+
+.thumb {
+  display: flex;
+  flex-direction: row;
+}
+
+.actions-box {
+  justify-content: space-between;
+}
+
+@media (max-width: 690px) {
+  .mediaQ {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

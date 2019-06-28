@@ -18,11 +18,10 @@ class Header extends React.Component {
   render() {
     return (
       <HeaderDiv>
-        <div>How To</div>
         {//Checks if user is logged in. If they are not, they receive the logged out header. If they are they receive the logged in header.
           !localStorage.getItem("userID")
             ? <LoggedOutHeader />
-            : <LoggedInHeader signOut={this.signOut} />}
+            : <LoggedInHeader signOut={this.signOut} history={this.props.history} />}
       </HeaderDiv>
     );
   }
@@ -33,7 +32,10 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
-padding-top: 2rem;`
+padding-top: 2rem;
+@media (max-width: 500px) {
+  flex-direction: column;
+}`
 const mapStateToProps = state => {
   return {
     error: state.error

@@ -6,6 +6,7 @@ class LoggedOutHeader extends React.Component {
     render() {
         return (
             <div>
+                <div>How To</div>
                 <Link to="/signup">
                     <Button>Sign Up</Button>
                 </Link>

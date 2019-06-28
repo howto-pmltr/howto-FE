@@ -1,6 +1,8 @@
 import React from "react";
 import { addStep, editStep, toggleEditStep } from "../actions";
 import { connect } from "react-redux";
+import { TextField, Button, Paper } from "@material-ui/core";
+import styled from "styled-components"
 
 class StepForm extends React.Component {
     state = {
@@ -75,31 +77,44 @@ class StepForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.props.editingStep === false ? this.postStep : this.changeStep}>
-                <input
+            <StyledForm onSubmit={this.props.editingStep === false ? this.postStep : this.changeStep}>
+                <TextField
                     autoFocus={true}
                     placeholder="Title"
                     onChange={this.handleChanges}
                     value={this.state.title}
                     name="title"
                 />
-                <input
+                <TextField
                     placeholder="Content"
                     onChange={this.handleChanges}
                     value={this.state.content}
                     name="content"
                 />
-                <input
+                <TextField
                     placeholder="Image URL"
                     onChange={this.handleChanges}
                     value={this.state.image_path}
                     name="image_path"
                 />
-                <button>{this.props.editingStep === false ? "Add Step" : "Save Changes"}</button>
-            </form>
+                <StepButton type="submit" variant="contained" >{this.props.editingStep === false ? "Add Step" : "Save Changes"}</StepButton>
+            </StyledForm>
         );
     }
 }
+
+const StyledForm = styled.form`
+display: flex;
+flex-direction: column
+width: 45%
+border: 2px solid black
+padding: 1rem
+background: white`
+
+const StepButton = styled(Button)({
+    background: "#621295 !important",
+    color: "white !important"
+});
 
 const mapStateToProps = state => {
     return {

@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Route path="/" component={Header} />
-      <PrivateRoute path="/" component={SearchBar} />
+      <PrivateRoute exact path="/search" component={SearchBar} />
       <Route path="/signup" component={Register} />
       <Route path="/login" component={Login} />
       <PrivateRoute exact path="/newpost" component={ArticleForm} />

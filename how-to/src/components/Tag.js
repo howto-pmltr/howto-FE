@@ -7,7 +7,6 @@ class Tag extends React.Component {
 
     render() {
         return <Chip
-            size="small"
             label={this.props.tag.title}
             onClick={() => this.props.tagSearch(this.props.tag.title)}
         />

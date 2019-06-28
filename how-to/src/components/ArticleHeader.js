@@ -9,7 +9,7 @@ import DeleteIcon from "@material-ui/icons/Delete"
 //styles
 import styled from "styled-components";
 
-import { Card, CardHeader, CardMedia, CardActionArea, CardActions, CardContent, Button, Typography, IconButton } from '@material-ui/core/';
+import { Card, CardHeader, CardMedia, CardActionArea, CardActions, CardContent, Button, Typography, IconButton, Tooltip } from '@material-ui/core/';
 
 class ArticleHeader extends React.Component {
 
@@ -43,10 +43,14 @@ class ArticleHeader extends React.Component {
     this.props.history.push(`/articles/${this.props.article.id}`);
   }
 
-
+  Like = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.likeArticle(this.props.article.id)
+  }
 
   render() {
-
+    console.log(this.props)
     return (
       <ArticleCard>
         {this.props.editingArticle === true
@@ -54,7 +58,7 @@ class ArticleHeader extends React.Component {
           : <Link to={`/articles/${this.props.article.id}`} className="linkEdit">
             <CardHeader
               title={this.props.article.title}
-              subheader={this.props.article.author_username} />
+              subheader={`Author: ${this.props.article.author_username}`} />
             <CardMedia
               className="card"
               image={`${this.props.article.image_path}`}
@@ -63,18 +67,39 @@ class ArticleHeader extends React.Component {
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">{this.props.article.description}</Typography>
             </CardContent>
-            {//userControls is a variable that checks if the currently logged in user matches the author of an article. 
-
-              //If the user is the author of the article, they will see this section which includes edit, delete and publish buttons. Publish will only appear if the article is currently unpublished. 
-              this.props.userControls
-                ? <CardActions >
-                  <IconButton aria-label="Edit Article" onClick={this.editPost}><EditIcon /></IconButton>
-                  <IconButton aria-label="Edit Article" onClick={this.removePost}><DeleteIcon /></IconButton>
-                  {this.props.article.published_at === null
-                    ? <Button size="small" color="primary" onClick={this.togglePublishPost}>Publish!</Button>
-                    : null}
-                </CardActions>
+            <CardActions className="actions-box">
+              {this.props.history.location.pathname === `/articles/${this.props.article.id}`
+                ? <div className="thumb">
+                  <Tooltip title="Like">
+                    <IconButton onClick={this.Like}>
+                      <i className="fas fa-thumbs-up" />
+                    </IconButton>
+                  </Tooltip>
+                  <p>{this.props.article.likes_count} Likes</p>
+                </div>
                 : null}
+
+              {//userControls is a variable that checks if the currently logged in user matches the author of an article. 
+                //If the user is the author of the article, they will see this section which includes edit, delete and publish buttons. Publish will only appear if the article is currently unpublished. 
+                this.props.userControls
+                  ? <div>
+                    <Tooltip title="Edit">
+                      <IconButton aria-label="Edit Article" onClick={this.editPost}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete">
+                      <IconButton aria-label="Edit Article" onClick={this.removePost}>
+                        <i class="fas fa-trash-alt" color="#c40b13" />
+                      </IconButton>
+                    </Tooltip>
+                    {this.props.article.published_at === null
+                      ? <Button size="small" color="primary" onClick={this.togglePublishPost}>Publish!</Button>
+                      : null}
+                  </div>
+                  : null}
+            </CardActions>
+
 
           </Link>}
       </ArticleCard>
@@ -83,16 +108,10 @@ class ArticleHeader extends React.Component {
 }
 
 const ArticleCard = styled(Card)({
-  margin: "2rem"
+  margin: "2rem",
+  marginBottom: "0",
+  height: "76%"
 });
-
-const TitleImg = styled.img`
-  width: 75%;
-`;
-
-const TitleBox = styled.div`
-
-`;
 
 const mapStateToProps = state => {
   return {

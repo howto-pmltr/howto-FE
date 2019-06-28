@@ -1,6 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
-import { fetchByAuthor } from "../actions"
+import { fetchByAuthor, fetchByText } from "../actions"
+
+//styles
+import { IconButton, InputAdornment, Input, FormControl } from '@material-ui/core/'
 
 
 class SearchBar extends React.Component {
@@ -17,28 +20,29 @@ class SearchBar extends React.Component {
 
     search = e => {
         e.preventDefault();
-        this.props.fetchByAuthor(this.state.searchTerm)
+        this.props.fetchByText(this.state.searchTerm)
         this.setState({ searchTerm: "" })
         this.props.history.push("/searchresults");
     }
 
     render() {
         return (
-
-            <form onSubmit={this.search}>
-                <input
+            <FormControl onSubmit={this.search}>
+                <Input
                     autoFocus={true}
-                    placeholder="Search"
                     onChange={this.handleChanges}
                     value={this.state.searchTerm}
                     name="searchTerm"
+                    placeholder="Search"
+                    endAdornment={<InputAdornment position="end"><IconButton onClick={this.search}><i class="fas fa-search" color="#f69314" /></IconButton></InputAdornment>}
                 />
-                <button onClick={this.search}>Search</button>
-            </form>
+            </FormControl>
 
         )
     }
 }
+
+
 
 const mapStateToProps = state => {
     return {
@@ -51,5 +55,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchByAuthor }
+    { fetchByAuthor, fetchByText }
 )(SearchBar);

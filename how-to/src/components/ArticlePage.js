@@ -8,10 +8,11 @@ import StepsBox from "./StepsBox"
 import StepForm from "./StepForm";
 import ArticleTags from "./ArticleTags";
 import TagForm from "./TagForm";
-import CommentSection from "./CommentSection"
 
 //styles
 import styled from "styled-components";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Paper } from "@material-ui/core";
 
 class ArticlePage extends React.Component {
     componentDidMount() {
@@ -30,49 +31,48 @@ class ArticlePage extends React.Component {
         this.props.fetchByTag(tag)
         this.props.history.push("/searchresults");
     }
-    Like = e => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.props.likeArticle(this.props.articles.id)
-    }
+
     render() {
         //checks to see if the user currently logged in is the author of the post.
         const userControls = localStorage.getItem("username") === this.props.articles.author_username;
 
         if (this.props.fetching) {
-            return <div>loading...</div>;
+            return <CircularProgress color="secondary" />;
         }
 
         return (
             <ArticleBox>
-                <ArticleHeader history= {this.props.history} article={this.props.articles} userControls={userControls} />
-                <p>{this.props.articles.likes_count} Likes</p>
-                <button onClick={this.Like}><i className="fas fa-thumbs-up" /></button>
-                {this.props.editingStep === false && userControls
-                    ? <StepForm />
-                    : null}
+                <ArticleHeader history={this.props.history} article={this.props.articles} userControls={userControls} />
+                <FormsBox>
+                    {this.props.editingStep === false && userControls
+                        ? <StepForm />
+                        : null}
+                    <div>
+                        {userControls
+                            ? <TagForm />
+                            : null}
 
-                {userControls
-                    ? <TagForm />
-                    : null}
-
-                {this.props.articles.tags
-                    ? this.props.articles.tags.map(tag => {
-                        return (
-                            <ArticleTags
-                                tag={tag}
-                                key={tag.id}
-                                articleID={this.props.articles.id}
-                                tagSearch={this.tagSearch} />
-                        );
-                    })
-                    : null}
+                        {this.props.articles.tags
+                            ? this.props.articles.tags.map(tag => {
+                                return (
+                                    <ArticleTags
+                                        tag={tag}
+                                        key={tag.id}
+                                        articleID={this.props.articles.id}
+                                        tagSearch={this.tagSearch} />
+                                );
+                            })
+                            : null}
+                    </div>
+                </FormsBox>
                 <StepsBox
+                    userControls={userControls}
                     editingStep={this.props.editingStep}
                     articles={this.props.articles}
                     toggleEditStep={this.props.toggleEditStep}
-                    deleteStep={this.props.deleteStep} />
-                <CommentSection />
+                    deleteStep={this.props.deleteStep}
+                />
+
             </ArticleBox>
         );
     }
@@ -82,7 +82,19 @@ class ArticlePage extends React.Component {
 const ArticleBox = styled.div`
                   width: 75%;
                   margin: auto;
+                  padding-top: 3rem;
+                  padding-bottom: 2rem;
+                  @media (max-width: 500px) {
+                    width: 95%;
+                  }
                 `;
+
+const FormsBox = styled.div`
+display: flex;
+flex-direction: row
+justify-content: space-between;
+flex-flow: wrap
+margin-top: 5rem`
 
 //redux
 const mapStateToProps = state => {

@@ -14,7 +14,7 @@ class Step extends React.Component {
     return (
       this.props.editingStep === true ? <StepForm stepInfo={this.props.step} /> :
         <StepCard>
-          <h2>{this.props.step.step_number}</h2>
+          <h2>{this.props.stepNumber}</h2>
           <StepImg
             src={`${this.props.step.img_path}`}
             alt={`${this.props.step.title}`}
@@ -35,7 +35,6 @@ const StepCard = styled.div`
   flex-direction: row;
   flex-flow: wrap;
   width: 40%;
-  border: 1px solid black;
   justify-content: center;
   align-items: center;
   margin: auto;

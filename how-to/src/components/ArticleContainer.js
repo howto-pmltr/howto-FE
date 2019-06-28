@@ -7,6 +7,7 @@ import ArticleHeader from "./ArticleHeader";
 
 //styles
 import styled from "styled-components";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class ArticleContainer extends React.Component {
   componentDidMount() {
@@ -41,12 +42,11 @@ class ArticleContainer extends React.Component {
 
 
   render() {
-    const currentArticles = Array.from(this.props.articles);
+    const currentArticles = Array.from(this.props.articles).sort((a, b) => b.id - a.id)
 
     if (this.props.fetching) {
-      return <div>loading...</div>;
+      return <CircularProgress color="secondary" />;
     }
-    console.log(this.props.articles);
     return (
       <ArticleBox>
         {currentArticles.map(article => (
@@ -61,6 +61,11 @@ class ArticleContainer extends React.Component {
 const ArticleBox = styled.div`
   width: 75%;
   margin: auto;
+  padding-bottom: 3rem; 
+  padding-top: 5rem;
+  @media (max-width: 500px) {
+    width: 95%;
+  }
 `;
 
 //redux

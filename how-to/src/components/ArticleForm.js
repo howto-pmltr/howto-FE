@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 //styles
 import styled from "styled-components"
+import { TextField, Button } from "@material-ui/core";
 
 class ArticleForm extends React.Component {
   state = {
@@ -77,37 +78,53 @@ class ArticleForm extends React.Component {
   render() {
     console.log(this.state.published_at)
     return (
-      <StyledForm onSubmit={this.props.editingArticle === false ? this.postArticle : this.changeArticle}>
-        <input
-          autoFocus={true}
-          placeholder="Title"
-          onChange={this.handleChanges}
-          value={this.state.title}
-          name="title"
-        />
-        <input
-          placeholder="Description"
-          onChange={this.handleChanges}
-          value={this.state.description}
-          name="description"
-        />
-        <input
-          placeholder="Image URL"
-          onChange={this.handleChanges}
-          value={this.state.image_path}
-          name="image_path"
-        />
-        <button>{this.props.editingArticle === false ? "Add Article" : "Submit Changes"}</button>
-      </StyledForm>
+      <FormBox>
+        <StyledForm onSubmit={this.props.editingArticle === false ? this.postArticle : this.changeArticle}>
+          <TextField
+            autoFocus={true}
+            placeholder="Title"
+            onChange={this.handleChanges}
+            value={this.state.title}
+            name="title"
+          />
+          <TextField
+            placeholder="Description"
+            onChange={this.handleChanges}
+            value={this.state.description}
+            name="description"
+          />
+          <TextField
+            placeholder="Image URL"
+            onChange={this.handleChanges}
+            value={this.state.image_path}
+            name="image_path"
+          />
+          <Button type="submit">{this.props.editingArticle === false ? "Add Article" : "Submit Changes"}</Button>
+        </StyledForm>
+        <PaddedDiv />
+      </FormBox>
     );
   }
 }
 
+const FormBox = styled.div`
+width: 75%;
+padding-top: 36.25%;
+padding-bottom:36.25%;
+margin: auto;
+min-height: 200px
+`;
+
+const PaddedDiv = styled.div`
+height: 76px;
+margin: 0;
+padding: 0;`
+
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
-    width: 50%;
-    margin: auto;
+    width: 75%;
+    margin:auto;
     `
 
 const mapStateToProps = state => {
