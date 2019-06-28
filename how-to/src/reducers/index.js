@@ -169,6 +169,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         adding: false,
+        articles: action.payload,
         error: ""
       };
     case ADD_ARTICLE_FAILURE:

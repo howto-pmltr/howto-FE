@@ -115,7 +115,7 @@ export const addArticle = newArticle => dispatch => {
   axiosWithAuth()
     .post(`/users/${newArticle.userID}/articles`, newArticle)
     .then(res => {
-      console.log(newArticle);
+      console.log(res)
       dispatch({ type: ADD_ARTICLE_SUCCESS, payload: res.data });
     })
     .catch(err => {

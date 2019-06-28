@@ -79,7 +79,6 @@ class StepForm extends React.Component {
         return (
             <StyledForm onSubmit={this.props.editingStep === false ? this.postStep : this.changeStep}>
                 <TextField
-                    autoFocus={true}
                     placeholder="Title"
                     onChange={this.handleChanges}
                     value={this.state.title}

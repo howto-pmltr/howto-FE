@@ -29,6 +29,7 @@ class ArticleForm extends React.Component {
   }
 
   handleChanges = e => {
+    console.log(this.state)
     this.setState({
       [e.target.name]: e.target.value
     });

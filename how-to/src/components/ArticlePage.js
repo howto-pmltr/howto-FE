@@ -50,7 +50,7 @@ class ArticlePage extends React.Component {
                             ? <TagForm />
                             : null}
                         <TagCard>
-                            {this.props.articles.tags !== undefined
+                            {this.props.articles.tags 
                                 ? this.props.articles.tags.map(tag => {
                                     return (
 
@@ -62,7 +62,8 @@ class ArticlePage extends React.Component {
 
                                     )
                                 })
-                                : "No Tags Yet!"}</TagCard>
+                                : "No Tags Yet!"}
+                        </TagCard>
                     </div>
                     {this.props.editingStep === false && userControls
                         ? <StepForm />

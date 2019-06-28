@@ -49,7 +49,7 @@ class ArticleHeader extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+
     return (
       <ArticleCard>
         {this.props.editingArticle === true
