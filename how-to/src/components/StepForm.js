@@ -1,7 +1,7 @@
 import React from "react";
-import { addStep, editStep, toggleEditStep } from "../actions";
+import { addStep, toggleEditStep, editStep } from "../actions";
 import { connect } from "react-redux";
-import { TextField, Button, Paper } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import styled from "styled-components"
 
 class StepForm extends React.Component {
@@ -109,7 +109,10 @@ flex-direction: column
 width: 45%
 border: 2px solid black
 padding: 1rem
-background: white`
+background: white
+@media (max-width: 500px) {
+    margin-top: 2rem
+  }`
 
 const StepButton = styled(Button)({
     background: "#621295 !important",

@@ -5,6 +5,7 @@ import { Route } from "react-router-dom";
 import "./styles/App.css";
 
 //components
+import Home from "./components/Home"
 import Header from "./components/Header.js";
 import Login from "./authentication/Login";
 import Register from "./authentication/Register";
@@ -19,8 +20,9 @@ function App() {
   return (
     <div className="App">
       <Route path="/" component={Header} />
+      <Route exact path="/" component={Home} />
       <PrivateRoute exact path="/search" component={SearchBar} />
-      <Route path="/signup" component={Register} />
+      <Route exact path="/signup" component={Register} />
       <Route path="/login" component={Login} />
       <PrivateRoute exact path="/newpost" component={ArticleForm} />
       <Route exact path="/articles/:id" component={ArticlePage} />

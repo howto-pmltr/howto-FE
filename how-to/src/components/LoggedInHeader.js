@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components"
 import SearchBar from "./SearchBar";
-import { IconButton, Tooltip, AppBar, Typography, Toolbar } from '@material-ui/core/';
+import { IconButton, Tooltip, AppBar, Toolbar } from '@material-ui/core/';
 
 import LogoImg from "../assets/Logo.png"
 
@@ -35,7 +35,22 @@ class LoggedInHeader extends React.Component {
                             }>
                             <Tooltip title="Profile" aria-label="Profile">
                                 <IconButton>
-                                    <i class="fas fa-user-circle" color="#621295" />
+                                    <i className="fas fa-user-circle" color="#621295" />
+                                </IconButton>
+                            </Tooltip>
+                        </Link>
+
+                        <Link to="/tags">
+                            <Tooltip title="Browse Hashtags" aria-label="Browse Hashtags">
+                                <IconButton>
+                                    <i className="fas fa-hashtag" color="#621295" />
+                                </IconButton>
+                            </Tooltip>
+                        </Link>
+                        <Link to="/newpost">
+                            <Tooltip title="Post New Tutorial" aria-label="Post New Tutorial">
+                                <IconButton>
+                                    <i className="fas fa-upload" color="#c40b13" />
                                 </IconButton>
                             </Tooltip>
                         </Link>
@@ -43,21 +58,7 @@ class LoggedInHeader extends React.Component {
                         <Link to="/login">
                             <Tooltip title="Log Out" aria-label="Log Out">
                                 <IconButton onClick={this.props.signOut} >
-                                    <i class="fas fa-power-off" color="#621295" />
-                                </IconButton>
-                            </Tooltip>
-                        </Link>
-                        <Link to="/newpost">
-                            <Tooltip title="Post New Tutorial" aria-label="Post New Tutorial">
-                                <IconButton>
-                                    <i className="fas fa-upload" color="#621295" />
-                                </IconButton>
-                            </Tooltip>
-                        </Link>
-                        <Link to="/tags">
-                            <Tooltip title="Browse Hashtags" aria-label="Browse Hashtags">
-                                <IconButton>
-                                    <i className="fas fa-hashtag" color="#621295" />
+                                    <i className="fas fa-power-off" color="black" />
                                 </IconButton>
                             </Tooltip>
                         </Link>
@@ -72,6 +73,7 @@ class LoggedInHeader extends React.Component {
 //styled components
 const Logo = styled.img`
 width:25%`
+
 const LogoSearch = styled.div`
 display: flex;
 flex-direction: row;

@@ -34,7 +34,7 @@ class SearchBar extends React.Component {
                     value={this.state.searchTerm}
                     name="searchTerm"
                     placeholder="Search"
-                    endAdornment={<InputAdornment position="end"><IconButton onClick={this.search}><i class="fas fa-search" color="#f69314" /></IconButton></InputAdornment>}
+                    endAdornment={<InputAdornment position="end"><IconButton onClick={this.search}><i className="fas fa-search" color="#f69314" /></IconButton></InputAdornment>}
                 />
             </FormControl>
 

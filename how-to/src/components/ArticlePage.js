@@ -11,8 +11,7 @@ import TagForm from "./TagForm";
 
 //styles
 import styled from "styled-components";
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { Paper } from "@material-ui/core";
+import { Card, CircularProgress } from "@material-ui/core";
 
 class ArticlePage extends React.Component {
     componentDidMount() {
@@ -37,33 +36,36 @@ class ArticlePage extends React.Component {
         const userControls = localStorage.getItem("username") === this.props.articles.author_username;
 
         if (this.props.fetching) {
-            return <CircularProgress color="secondary" />;
+            return <Loader color="secondary" />;
         }
 
         return (
             <ArticleBox>
                 <ArticleHeader history={this.props.history} article={this.props.articles} userControls={userControls} />
                 <FormsBox>
-                    {this.props.editingStep === false && userControls
-                        ? <StepForm />
-                        : null}
                     <div>
                         {userControls
                             ? <TagForm />
                             : null}
+                        <TagCard>
+                            {this.props.articles.tags !== undefined
+                                ? this.props.articles.tags.map(tag => {
+                                    return (
 
-                        {this.props.articles.tags
-                            ? this.props.articles.tags.map(tag => {
-                                return (
-                                    <ArticleTags
-                                        tag={tag}
-                                        key={tag.id}
-                                        articleID={this.props.articles.id}
-                                        tagSearch={this.tagSearch} />
-                                );
-                            })
-                            : null}
+                                        <ArticleTags
+                                            tag={tag}
+                                            key={tag.id}
+                                            articleID={this.props.articles.id}
+                                            tagSearch={this.tagSearch} />
+
+                                    )
+                                })
+                                : "No Tags Yet!"}</TagCard>
                     </div>
+                    {this.props.editingStep === false && userControls
+                        ? <StepForm />
+                        : null}
+
                 </FormsBox>
                 <StepsBox
                     userControls={userControls}
@@ -91,10 +93,23 @@ const ArticleBox = styled.div`
 
 const FormsBox = styled.div`
 display: flex;
-flex-direction: row
+flex-direction: row;
 justify-content: space-between;
-flex-flow: wrap
-margin-top: 5rem`
+flex-flow: wrap;
+margin-top: 5rem;
+margin-bottom: 5rem;
+@media (max-width: 500px) {
+    justify-content: center;
+  }`
+
+const Loader = styled(CircularProgress)({
+    paddingTop: "10rem"
+});
+
+
+const TagCard = styled(Card)({
+    padding: "2%"
+});
 
 //redux
 const mapStateToProps = state => {

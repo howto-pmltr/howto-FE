@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addTags, addArticleTags } from "../actions";
+import { TextField, Button } from "@material-ui/core";
+import styled from "styled-components"
 
 class TagForm extends React.Component {
     state = {
@@ -24,19 +26,29 @@ class TagForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.postTag}>
-                <input
+            <TagFormStyle onSubmit={this.postTag}>
+                <TextField
                     autoFocus={true}
-                    placeholder="Title"
+                    placeholder="Enter Tag"
                     onChange={this.handleChanges}
                     value={this.state.title}
                     name="title"
+                    variant="outlined"
                 />
-                <button>Add Tag</button>
-            </form>
+                <TagButton type="submit" >Add Tag</TagButton>
+            </TagFormStyle>
         );
     }
 }
+
+const TagFormStyle = styled.form`
+margin-bottom: 4rem`
+
+const TagButton = styled(Button)({
+    background: "#621295 !important",
+    color: "white !important",
+    height: "3.5rem"
+});
 
 const mapStateToProps = state => {
     return {

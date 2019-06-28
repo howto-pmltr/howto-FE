@@ -76,7 +76,6 @@ class ArticleForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.published_at)
     return (
       <FormBox>
         <StyledForm onSubmit={this.props.editingArticle === false ? this.postArticle : this.changeArticle}>

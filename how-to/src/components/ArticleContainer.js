@@ -45,7 +45,7 @@ class ArticleContainer extends React.Component {
     const currentArticles = Array.from(this.props.articles).sort((a, b) => b.id - a.id)
 
     if (this.props.fetching) {
-      return <CircularProgress color="secondary" />;
+      return <Loader color="secondary" />;
     }
     return (
       <ArticleBox>
@@ -67,6 +67,10 @@ const ArticleBox = styled.div`
     width: 95%;
   }
 `;
+
+const Loader = styled(CircularProgress)({
+  paddingTop: "10rem"
+});
 
 //redux
 const mapStateToProps = state => {
