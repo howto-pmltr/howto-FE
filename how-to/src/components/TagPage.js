@@ -4,7 +4,6 @@ import { fetchTags, fetchByTag } from "../actions"
 import Tag from "./Tag"
 
 import styled from "styled-components"
-import Rotate from 'react-reveal/Rotate';
 
 class TagPage extends React.Component {
 
