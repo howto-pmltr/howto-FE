@@ -62,4 +62,4 @@
 
 * Dennis Mercado
 
-####### As always, a special thanks goes out to Isaac Houle, my wonderful PM who critiques my code day in and day out!
+###### As always, a special thanks goes out to Isaac Houle, my wonderful PM who critiques my code day in and day out!
