@@ -15,10 +15,7 @@ class LoggedInHeader extends React.Component {
                 <HeaderBar className="mediaQ">
                     <LogoSearch>
                         <Logo src={LogoImg} alt="Logo" />
-
-                        <div>
-                            <SearchBar history={this.props.history} />
-                        </div>
+                        <SearchBar history={this.props.history} />
                     </LogoSearch>
                     <IconHolder>
                         <Link to="/home">
@@ -90,7 +87,7 @@ const IconHolder = styled.div`
 display: flex;
 flex-direction: row;
 flex-flow: wrap;
-width: 35 %;
+width: 40 %;
 justify-content: space-evenly; `
 
 const HeaderBar = styled(Toolbar)({
