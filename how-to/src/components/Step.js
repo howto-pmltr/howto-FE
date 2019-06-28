@@ -1,4 +1,6 @@
 import React from "react";
+import StepForm from "./StepForm"
+import { CardMedia, Typography, CardContent, CardActionArea, IconButton, Tooltip } from "@material-ui/core"
 
 //styles
 import styled from "styled-components";
@@ -8,36 +10,38 @@ class Step extends React.Component {
     e.preventDefault();
     this.props.deleteStep(this.props.article_id, this.props.step.id);
   };
+
   render() {
+    console.log(this.props.step)
     return (
-      <StepCard>
-        <h2>{this.props.step.step_number}</h2>
-        <StepImg
-          src={`${this.props.step.img_path}`}
-          alt={`${this.props.step.title}`}
-        />
-        <p>{this.props.step.content}</p>
-        <button onClick={this.removeStep}>X</button>
-      </StepCard>
+      <div>
+        <CardActionArea>
+          <CardImage
+            image={`${this.props.step.image_path}`}
+            title={`${this.props.step.title}`} />
+          {this.props.editingStep === true
+            ? <StepForm stepInfo={this.props.step} />
+            : <CardContent>
+              <Typography component="h6">
+                Step #{this.props.stepNumber} : {this.props.step.title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {this.props.step.content}
+              </Typography>
+            </CardContent>}
+        </CardActionArea >
+        {this.props.userControls === true ? <Tooltip title="Delete">
+          <IconButton onClick={this.removeStep}><i className="fas fa-trash-alt" /></IconButton>
+        </Tooltip> : null}
+      </div >
+
     );
   }
 }
 
-const StepImg = styled.img`
-  width: 60%;
-`;
 
-const StepCard = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-flow: wrap;
-  width: 40%;
-  border: 1px solid black;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  height: 15rem;
-  margin-top: 1rem;
-`;
+const CardImage = styled(CardMedia)({
+  padding: "25%"
+});
 
 export default Step;
