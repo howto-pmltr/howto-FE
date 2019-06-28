@@ -46,6 +46,7 @@ class Register extends React.Component {
               placeholder="Email"
               onChange={this.handleChanges}
               name="email"
+              type="email"
               value={this.state.credentials.email}
               variant="outlined"
               margin="normal"
