@@ -45,6 +45,7 @@ const SignUpButton = styled(Button)({
 const LogInButton = styled(Button)({
     background: "#f69314 !important",
     color: "white !important",
+    textDecoration: "none !important"
 });
 
 const LearnButton = styled(Button)({
