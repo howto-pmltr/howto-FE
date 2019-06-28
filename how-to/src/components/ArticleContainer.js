@@ -16,9 +16,7 @@ class ArticleContainer extends React.Component {
       return this.props.articles
     }
     console.log(userID);
-    if (!userID) {
-      this.props.fetchArticle();
-    } else this.props.fetchArticle(userID);
+    this.props.fetchArticle(userID);
     if (!this.props.articles) {
       this.props.fetchArticle(userID)
     }

@@ -12,5 +12,12 @@ class Home extends React.Component {
 }
 
 const Skater = styled.img`
-padding-top: 5rem`
+padding-top: 5rem
+display: flex;
+align-items: center
+@media (max-width: 650px) {
+    padding-top: 30vh;
+    width: 75%;
+    margin: auto;
+}`
 export default Home;

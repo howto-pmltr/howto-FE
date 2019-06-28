@@ -32,15 +32,23 @@ class TagPage extends React.Component {
 const TagHolder = styled.div`
 border: 2px solid black;
 background-color: white;
-padding: 5rem;
+padding: 2rem;
+position: absolute;
+top: 200px;
+margin: auto;
+width: 50%;
+height: 40%;
 display: flex
-justify-content: space-evenly;
-align-items: center
 flex-direction: row;
 flex-flow: wrap
-@media (max-width: 500px) {
+justify-content: space-between
+align-items: center
+@media (max-width: 650px) {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     padding: 0
-    width: 95%;
+    width: 90%;
     max-width: 480px
     height: 500px
   }`

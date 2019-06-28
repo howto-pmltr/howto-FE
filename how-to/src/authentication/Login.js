@@ -62,6 +62,11 @@ class Login extends React.Component {
               color="primary"
             >{this.props.loggingIn ? "Logging in.." : "Log In"}</LoginButton>
           </LoginForm>
+          <div>
+            {this.props.error !== ""
+              ? this.props.error.message
+              : null}
+          </div>
         </Paper>
       </div>
     );

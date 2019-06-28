@@ -4,8 +4,6 @@
   margin: auto;
   width: 95%;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
 }
 
 @media screen and (max-width: 500px) {
