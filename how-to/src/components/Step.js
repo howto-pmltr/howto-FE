@@ -30,9 +30,13 @@ class Step extends React.Component {
               </Typography>
             </CardContent>}
         </CardActionArea >
-        {this.props.userControls === true ? <Tooltip title="Delete">
-          <IconButton onClick={this.removeStep}><i className="fas fa-trash-alt" /></IconButton>
-        </Tooltip> : null}
+        {this.props.userControls === true
+          ? <Tooltip title="Delete">
+            <IconButton onClick={this.removeStep}>
+              <i className="fas fa-trash-alt" />
+            </IconButton>
+          </Tooltip>
+          : null}
       </div >
 
     );
