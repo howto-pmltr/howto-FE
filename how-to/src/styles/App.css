@@ -64,6 +64,11 @@
   margin-top: 20vh;
 }
 
+@media (max-width: 690px) {
+  .signUpsignIn {
+    margin-top: 10vh;
+  }
+}
 .card {
   padding: 36.25%;
 }

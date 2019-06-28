@@ -87,7 +87,7 @@ class ArticlePage extends React.Component {
 const ArticleBox = styled.div`
                   width: 75%;
                   margin: auto;
-                  padding-top: 3rem;
+                  padding-top: 5rem;
                   padding-bottom: 2rem;
                   @media (max-width: 500px) {
                     width: 95%;

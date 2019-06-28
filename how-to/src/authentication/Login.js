@@ -41,6 +41,7 @@ class Login extends React.Component {
             <TextField
               autoFocus={true}
               placeholder="Username"
+              autocapitalize="none"
               onChange={this.handleChanges}
               name="username"
               value={this.state.credentials.username}
