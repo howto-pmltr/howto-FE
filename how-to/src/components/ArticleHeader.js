@@ -7,7 +7,8 @@ import EditIcon from "@material-ui/icons/Edit"
 
 //styles
 import styled from "styled-components";
-
+import Fade from 'react-reveal/Fade';
+import RubberBand from 'react-reveal/RubberBand';
 import { Card, CardHeader, CardMedia, CardActions, CardContent, Typography, IconButton, Tooltip, Switch, FormGroup, FormControlLabel } from '@material-ui/core/';
 
 class ArticleHeader extends React.Component {
@@ -51,61 +52,63 @@ class ArticleHeader extends React.Component {
   render() {
 
     return (
-      <ArticleCard>
-        {this.props.editingArticle === true
-          ? <ArticleForm postInfo={this.props.article} />
-          : <Link to={`/articles/${this.props.article.id}`} className="linkEdit">
-            <CardHeader
-              title={this.props.article.title}
-              subheader={`Author: ${this.props.article.author_username}`} />
-            <CardMedia
-              className="card"
-              image={`${this.props.article.image_path}`}
-              title={`${this.props.article.title}`}
-            />
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">{this.props.article.description}</Typography>
-            </CardContent>
-            <CardActions className="actions-box">
-              {this.props.history.location.pathname === `/articles/${this.props.article.id}`
-                ? <div className="thumb">
-                  <Tooltip title="Like">
-                    <IconButton onClick={this.Like}>
-                      <i className="fas fa-thumbs-up" />
-                    </IconButton>
-                  </Tooltip>
-                  <p>{this.props.article.likes_count} Likes</p>
-                </div>
-                : null}
-
-              {//userControls is a variable that checks if the currently logged in user matches the author of an article. 
-                //If the user is the author of the article, they will see this section which includes edit, delete and publish buttons. Publish will only appear if the article is currently unpublished. 
-                this.props.userControls
-                  ? <div>
-                    <Tooltip title="Edit">
-                      <IconButton aria-label="Edit Article" onClick={this.editPost}>
-                        <EditIcon />
+      <Fade left cascade>
+        <ArticleCard>
+          {this.props.editingArticle === true
+            ? <RubberBand><ArticleForm postInfo={this.props.article} /></RubberBand>
+            : <Link to={`/articles/${this.props.article.id}`} className="linkEdit">
+              <CardHeader
+                title={this.props.article.title}
+                subheader={`Author: ${this.props.article.author_username}`} />
+              <CardMedia
+                className="card"
+                image={`${this.props.article.image_path}`}
+                title={`${this.props.article.title}`}
+              />
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">{this.props.article.description}</Typography>
+              </CardContent>
+              <CardActions className="actions-box">
+                {this.props.history.location.pathname === `/articles/${this.props.article.id}`
+                  ? <div className="thumb">
+                    <Tooltip title="Like">
+                      <IconButton onClick={this.Like}>
+                        <i className="fas fa-thumbs-up" />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Delete">
-                      <IconButton aria-label="Edit Article" onClick={this.removePost}>
-                        <i className="fas fa-trash-alt" color="#c40b13" />
-                      </IconButton>
-                    </Tooltip>
-                    {this.props.article.published_at === null
-                      ? <FormGroup>
-                        <FormControlLabel
-                          control={<Switch onChange={this.togglePublishPost} />}
-                          label="Publish" />
-                      </FormGroup>
-                      : null}
+                    <p>{this.props.article.likes_count} Likes</p>
                   </div>
                   : null}
-            </CardActions>
+
+                {//userControls is a variable that checks if the currently logged in user matches the author of an article. 
+                  //If the user is the author of the article, they will see this section which includes edit, delete and publish buttons. Publish will only appear if the article is currently unpublished. 
+                  this.props.userControls
+                    ? <div>
+                      <Tooltip title="Edit">
+                        <IconButton aria-label="Edit Article" onClick={this.editPost}>
+                          <EditIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="Delete">
+                        <IconButton aria-label="Edit Article" onClick={this.removePost}>
+                          <i className="fas fa-trash-alt" color="#c40b13" />
+                        </IconButton>
+                      </Tooltip>
+                      {this.props.article.published_at === null
+                        ? <FormGroup>
+                          <FormControlLabel
+                            control={<Switch onChange={this.togglePublishPost} />}
+                            label="Publish" />
+                        </FormGroup>
+                        : null}
+                    </div>
+                    : null}
+              </CardActions>
 
 
-          </Link>}
-      </ArticleCard>
+            </Link>}
+        </ArticleCard>
+      </Fade>
     );
   }
 }
