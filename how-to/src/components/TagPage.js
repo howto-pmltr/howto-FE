@@ -19,11 +19,11 @@ class TagPage extends React.Component {
     render() {
         console.log(this.props.tags)
         return (
-            <TagHolder>
-                {this.props.tags.map(tag => {
-                    return <Tag key={tag.id} tag={tag} tagSearch={this.tagSearch} />
-                })}
-            </TagHolder>
+                <TagHolder>
+                    {this.props.tags.map(tag => {
+                        return <Tag key={tag.id} tag={tag} tagSearch={this.tagSearch} />
+                    })}
+                </TagHolder>
         )
     }
 }

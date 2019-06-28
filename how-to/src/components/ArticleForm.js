@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 //styles
 import styled from "styled-components"
 import { TextField, Button } from "@material-ui/core";
+import RubberBand from 'react-reveal/RubberBand';
 
 class ArticleForm extends React.Component {
   state = {
@@ -78,30 +79,32 @@ class ArticleForm extends React.Component {
 
   render() {
     return (
-      <FormBox>
-        <StyledForm onSubmit={this.props.editingArticle === false ? this.postArticle : this.changeArticle}>
-          <TextField
-            placeholder="Title"
-            onChange={this.handleChanges}
-            value={this.state.title}
-            name="title"
-          />
-          <TextField
-            placeholder="Description"
-            onChange={this.handleChanges}
-            value={this.state.description}
-            name="description"
-          />
-          <TextField
-            placeholder="Image URL"
-            onChange={this.handleChanges}
-            value={this.state.image_path}
-            name="image_path"
-          />
-          <Button type="submit">{this.props.editingArticle === false ? "Add Article" : "Submit Changes"}</Button>
-        </StyledForm>
-        <PaddedDiv />
-      </FormBox>
+      <RubberBand>
+        <FormBox>
+          <StyledForm onSubmit={this.props.editingArticle === false ? this.postArticle : this.changeArticle}>
+            <TextField
+              placeholder="Title"
+              onChange={this.handleChanges}
+              value={this.state.title}
+              name="title"
+            />
+            <TextField
+              placeholder="Description"
+              onChange={this.handleChanges}
+              value={this.state.description}
+              name="description"
+            />
+            <TextField
+              placeholder="Image URL"
+              onChange={this.handleChanges}
+              value={this.state.image_path}
+              name="image_path"
+            />
+            <Button type="submit">{this.props.editingArticle === false ? "Add Article" : "Submit Changes"}</Button>
+          </StyledForm>
+          <PaddedDiv />
+        </FormBox>
+      </RubberBand>
     );
   }
 }
