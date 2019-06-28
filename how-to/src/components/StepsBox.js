@@ -5,6 +5,16 @@ import { Card, Button } from "@material-ui/core"
 
 class StepsBox extends React.Component {
 
+    state = {
+        steps: ""
+    }
+
+    componentDidMount() {
+        this.setState({
+            steps: this.props.articles.steps
+        })
+    }
+
     editSteps = e => {
         e.preventDefault();
         this.props.toggleEditStep();

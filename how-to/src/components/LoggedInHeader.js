@@ -15,6 +15,7 @@ class LoggedInHeader extends React.Component {
                 <HeaderBar className="mediaQ">
                     <LogoSearch>
                         <Logo src={LogoImg} alt="Logo" />
+
                         <div>
                             <SearchBar history={this.props.history} />
                         </div>
@@ -64,7 +65,7 @@ class LoggedInHeader extends React.Component {
                         </Link>
                     </IconHolder>
                 </HeaderBar>
-            </AppBar>
+            </AppBar >
         )
     }
 }
@@ -72,14 +73,15 @@ class LoggedInHeader extends React.Component {
 
 //styled components
 const Logo = styled.img`
-width:25%`
+width:25%
+`
 
 const LogoSearch = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
-width: 50%;
+width: 60%;
 @media (max-width: 690px) {
     flex-direction: column;
   }`
@@ -95,7 +97,6 @@ const HeaderBar = styled(Toolbar)({
     display: "flex",
     justifyContent: "space-between",
     maxWidth: "1000px",
-    marginLeft: "10%",
-    marginRight: "10%"
+    margin: "auto"
 });
 export default LoggedInHeader;

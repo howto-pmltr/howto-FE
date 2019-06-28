@@ -5,14 +5,6 @@ import { deleteTags } from "../actions"
 import Chip from "@material-ui/core/Chip";
 
 class ArticleTags extends React.Component {
-    state = {
-        edit: false
-    }
-
-    toggleTag = e => {
-        e.preventDefault()
-        this.setState({ edit: !this.state.edit })
-    }
 
     deleteTag = e => {
         e.preventDefault()
@@ -23,12 +15,12 @@ class ArticleTags extends React.Component {
     render() {
         console.log(this.props)
         return (
-                <Chip
-                    label={this.props.tag.tag_title}
-                    onClick={() => this.props.tagSearch(this.props.tag.tag_title)}
-                    onDelete={this.deleteTag}
-                    variant="outlined"
-                />
+            <Chip
+                label={this.props.tag.tag_title}
+                onClick={() => this.props.tagSearch(this.props.tag.tag_title)}
+                onDelete={this.deleteTag}
+                variant="outlined"
+            />
         );
     }
 }
@@ -36,7 +28,6 @@ class ArticleTags extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        articles: state.articles,
         error: state.error
     };
 };

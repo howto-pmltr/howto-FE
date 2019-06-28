@@ -14,6 +14,8 @@ import styled from "styled-components";
 import { Card, CircularProgress } from "@material-ui/core";
 
 class ArticlePage extends React.Component {
+
+
     componentDidMount() {
         const id = this.props.match.url.replace(/[^0-9]/g, "");
         this.props.findSpecificArticle(id);
