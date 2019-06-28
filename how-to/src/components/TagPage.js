@@ -4,6 +4,7 @@ import { fetchTags, fetchByTag } from "../actions"
 import Tag from "./Tag"
 
 import styled from "styled-components"
+import Rotate from 'react-reveal/Rotate';
 
 class TagPage extends React.Component {
 
@@ -19,11 +20,13 @@ class TagPage extends React.Component {
     render() {
         console.log(this.props.tags)
         return (
-            <TagHolder>
-                {this.props.tags.map(tag => {
-                    return <Tag key={tag.id} tag={tag} tagSearch={this.tagSearch} />
-                })}
-            </TagHolder>
+            <Rotate cascade>
+                <TagHolder>
+                    {this.props.tags.map(tag => {
+                        return <Tag key={tag.id} tag={tag} tagSearch={this.tagSearch} />
+                    })}
+                </TagHolder>
+            </Rotate>
         )
     }
 }

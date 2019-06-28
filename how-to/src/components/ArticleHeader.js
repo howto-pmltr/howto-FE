@@ -8,7 +8,6 @@ import EditIcon from "@material-ui/icons/Edit"
 //styles
 import styled from "styled-components";
 import Fade from 'react-reveal/Fade';
-import RubberBand from 'react-reveal/RubberBand';
 import { Card, CardHeader, CardMedia, CardActions, CardContent, Typography, IconButton, Tooltip, Switch, FormGroup, FormControlLabel } from '@material-ui/core/';
 
 class ArticleHeader extends React.Component {
@@ -55,7 +54,7 @@ class ArticleHeader extends React.Component {
       <Fade left cascade>
         <ArticleCard>
           {this.props.editingArticle === true
-            ? <RubberBand><ArticleForm postInfo={this.props.article} /></RubberBand>
+            ? <ArticleForm postInfo={this.props.article} />
             : <Link to={`/articles/${this.props.article.id}`} className="linkEdit">
               <CardHeader
                 title={this.props.article.title}
