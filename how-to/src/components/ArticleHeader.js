@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteArticle, toggleEditArticle, editArticle, likeArticle } from "../actions";
 import ArticleForm from "./ArticleForm"
-import EditIcon from "@material-ui/icons/Edit"
+import EditingTools from "./EditingTools"
 
 //styles
 import styled from "styled-components";
 import Fade from 'react-reveal/Fade';
-import { Card, CardHeader, CardMedia, CardActions, CardContent, Typography, IconButton, Tooltip, Switch, FormGroup, FormControlLabel } from '@material-ui/core/';
+import { Card, CardHeader, CardMedia, CardActions, CardContent, Typography, IconButton, Tooltip } from '@material-ui/core/';
 
 class ArticleHeader extends React.Component {
 
@@ -82,25 +82,11 @@ class ArticleHeader extends React.Component {
                 {//userControls is a variable that checks if the currently logged in user matches the author of an article. 
                   //If the user is the author of the article, they will see this section which includes edit, delete and publish buttons. Publish will only appear if the article is currently unpublished. 
                   this.props.userControls
-                    ? <div>
-                      <Tooltip title="Edit">
-                        <IconButton aria-label="Edit Article" onClick={this.editPost}>
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="Delete">
-                        <IconButton aria-label="Edit Article" onClick={this.removePost}>
-                          <i className="fas fa-trash-alt" color="#c40b13" />
-                        </IconButton>
-                      </Tooltip>
-                      {this.props.article.published_at === null
-                        ? <FormGroup>
-                          <FormControlLabel
-                            control={<Switch onChange={this.togglePublishPost} />}
-                            label="Publish" />
-                        </FormGroup>
-                        : null}
-                    </div>
+                    ? <EditingTools
+                      editPost={this.editPost}
+                      removePost={this.removePost}
+                      togglePublishPost={this.togglePublishPost}
+                      published={this.props.article.published_at} />
                     : null}
               </CardActions>
 
