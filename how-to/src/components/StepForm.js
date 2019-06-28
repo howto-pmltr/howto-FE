@@ -105,10 +105,12 @@ class StepForm extends React.Component {
 const StyledForm = styled.form`
 display: flex;
 flex-direction: column
-width: 45%
+width: 55%
 border: 2px solid black
 padding: 1rem
-background: white
+background: white;
+margin: auto;
+margin-top: 0
 @media (max-width: 500px) {
     margin-top: 2rem
   }`

@@ -33,9 +33,11 @@ const TagHolder = styled.div`
 border: 2px solid black;
 background-color: white;
 padding: 2rem;
-position: absolute;
+position: fixed;
 top: 200px;
-margin: auto;
+@media (min-width: 650px) {
+left: 20%
+}
 width: 50%;
 height: 40%;
 display: flex
@@ -43,13 +45,14 @@ flex-direction: row;
 flex-flow: wrap
 justify-content: space-between
 align-items: center
+margin: auto;
 @media (max-width: 650px) {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     padding: 0
     width: 90%;
-    max-width: 480px
+    left: 5%;
     height: 500px
   }`
 const mapStateToProps = state => {

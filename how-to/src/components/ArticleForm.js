@@ -112,11 +112,11 @@ width: 75%;
 padding-top: 36.25%;
 padding-bottom:36.25%;
 margin: auto;
-min-height: 200px
+min-height: 200px;
 `;
 
 const PaddedDiv = styled.div`
-height: 76px;
+height: 52px;
 margin: 0;
 padding: 0;`
 
@@ -125,6 +125,9 @@ const StyledForm = styled.form`
     flex-direction: column;
     width: 75%;
     margin:auto;
+    border: 2px solid black;
+    background: white;
+    padding: 2%;
     `
 
 const mapStateToProps = state => {

@@ -2,6 +2,7 @@ import React from "react";
 import Step from "./Step"
 
 import { Card, Button } from "@material-ui/core"
+import styled from "styled-components"
 
 class StepsBox extends React.Component {
 
@@ -23,7 +24,7 @@ class StepsBox extends React.Component {
     render() {
         return (
             <div>
-                <Card>
+                <StepCard>
                     {this.props.articles.steps
                         ? this.props.articles.steps.map((step, index) => {
                             return (
@@ -40,7 +41,7 @@ class StepsBox extends React.Component {
                             );
                         })
                         : null}
-                </Card>
+                </StepCard>
                 {this.props.userControls === true
                     ? <Button type="submit" variant="contained" color="secondary" onClick={this.editSteps}>Edit Steps!</Button>
                     : null}
@@ -48,5 +49,10 @@ class StepsBox extends React.Component {
         )
     }
 }
+
+
+const StepCard = styled(Card)({
+    marginBottom: "2rem"
+});
 
 export default StepsBox

@@ -45,12 +45,12 @@ class ArticlePage extends React.Component {
             <ArticleBox>
                 <ArticleHeader history={this.props.history} article={this.props.articles} userControls={userControls} />
                 <FormsBox>
-                    <div>
+                    <div className="tag-holder">
                         {userControls
                             ? <TagForm />
                             : null}
                         <TagCard>
-                            {this.props.articles.tags 
+                            {this.props.articles.tags
                                 ? this.props.articles.tags.map(tag => {
                                     return (
 
@@ -111,7 +111,7 @@ const Loader = styled(CircularProgress)({
 
 
 const TagCard = styled(Card)({
-    padding: "2%"
+    margin: "auto"
 });
 
 //redux

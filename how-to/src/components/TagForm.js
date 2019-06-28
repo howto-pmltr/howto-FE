@@ -28,7 +28,6 @@ class TagForm extends React.Component {
         return (
             <TagFormStyle onSubmit={this.postTag}>
                 <TextField
-                    autoFocus={true}
                     placeholder="Enter Tag"
                     onChange={this.handleChanges}
                     value={this.state.title}
@@ -42,6 +41,7 @@ class TagForm extends React.Component {
 }
 
 const TagFormStyle = styled.form`
+margin: auto;
 margin-bottom: 4rem`
 
 const TagButton = styled(Button)({

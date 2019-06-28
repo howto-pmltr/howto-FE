@@ -87,3 +87,8 @@
     margin-right: 0 !important;
   }
 }
+
+.tag-holder {
+  margin: auto;
+  margin-bottom: 2rem;
+}
