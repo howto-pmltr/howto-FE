@@ -15,7 +15,9 @@
 - Save articles as drafts/private or publish to the public.
 - Profile page that shows all of your public and private articles.
 - Like articles.
-- Seamlessly update articles and steps without leaving the article. \* Conditionally rendered components to reduce overall amount of reused code and redundant components.
+- Seamlessly update articles and steps without leaving the article.
+
+* Conditionally rendered components to reduce overall amount of reused code and redundant components.
 
 ## Development Roadmap
 
