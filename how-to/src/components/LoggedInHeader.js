@@ -28,7 +28,7 @@ class LoggedInHeader extends React.Component {
                         <Link
                             to={
                                 localStorage.getItem("userID")
-                                    ? `/${localStorage.getItem("userID")}`
+                                    ? "/me"
                                     : "/login"
                             }>
                             <Tooltip title="Profile" aria-label="Profile">

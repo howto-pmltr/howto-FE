@@ -28,7 +28,7 @@ function App() {
       <Route exact path="/articles/:id" component={ArticlePage} />
       <PrivateRoute exact path="/home" component={ArticleContainer} />
       <PrivateRoute
-        path={`/${localStorage.getItem("userID")}`}
+        path={"/me"}
         component={ArticleContainer}
       />
       <PrivateRoute exact path="/searchresults" component={ArticleContainer} />
