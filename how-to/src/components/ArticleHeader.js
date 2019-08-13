@@ -75,7 +75,7 @@ class ArticleHeader extends React.Component {
                         <i className="fas fa-thumbs-up" />
                       </IconButton>
                     </Tooltip>
-                    <p>{this.props.article.likes_count} Likes</p>
+                    <p>{this.props.article.likes_count} {this.props.article.likes_count === null ? null : (this.props.article.likes_count > 1 ? 'Likes' : 'Like')}</p>
                   </div>
                   : null}
 

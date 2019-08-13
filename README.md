@@ -27,6 +27,7 @@
 - Allow users to browse articles they have liked.
 - Click username to search by Author (Search by Author functionality exists but click name functionality upcoming!)
 - Follow other users, recommend articles to users, direct message users.
+- Allow users to search for their unpublished articles so they can easily check which articles are still private.
 
 ## Potential Pivot
 

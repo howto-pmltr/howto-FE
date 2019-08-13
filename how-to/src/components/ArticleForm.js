@@ -53,7 +53,7 @@ class ArticleForm extends React.Component {
       description: "",
       image_path: ""
     });
-    this.props.history.push(`/${localStorage.getItem("userID")}`);
+    this.props.history.push("/me");
   };
 
   changeArticle = e => {
