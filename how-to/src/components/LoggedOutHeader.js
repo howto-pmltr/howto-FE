@@ -14,10 +14,10 @@ class LoggedOutHeader extends React.Component {
         return (
             <LogInHeader>
                 <Logo src={LogoImg} alt="Logo" />
-                <Link to="/signup">
+                <Link to="/signup" >
                     <SignUpButton variant="contained">Sign Up</SignUpButton>
                 </Link>
-                <Link to="/login">
+                <Link to="/login" style={{ textDecoration: 'none' }}>
                     <LogInButton variant="contained">Log In</LogInButton>
                 </Link>
                 <LearnButton variant="contained" href="https://hardcore-goodall-4c6937.netlify.com/">Learn More</LearnButton>
@@ -34,7 +34,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-around;
 align-items: center;
-padding-top: 2rem`
+padding-top: 2rem;`
 
 const SignUpButton = styled(Button)({
     background: "#621295 !important",
@@ -44,8 +44,7 @@ const SignUpButton = styled(Button)({
 
 const LogInButton = styled(Button)({
     background: "#f69314 !important",
-    color: "white !important",
-    textDecoration: "none !important"
+    color: "white !important"
 });
 
 const LearnButton = styled(Button)({
